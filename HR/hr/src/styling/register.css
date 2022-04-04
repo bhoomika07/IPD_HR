@@ -1,0 +1,35 @@
+h4{
+    text-align: center;
+    margin: 5%;
+    font-weight: 800;
+    font-size: 30px;
+}
+i{
+    color: #4540DB;
+}
+img{
+    float: left;
+    width: 50%;
+}
+form{
+    float: right;
+    align-items: center;
+}
+span{
+    margin-bottom: 1%; 
+}
+.form-check{
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+input[type="button"]{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8%;
+}
+p{
+    text-align: center;
+}

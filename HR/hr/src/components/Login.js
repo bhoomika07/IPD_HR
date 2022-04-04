@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import Login from '../img/login.png';
+import Loginimg from '../img/login.png';
 import "../styling/register.css"
-
-const Register = () => {
+const Login = () => {
 
   const [user, setUser] = useState({
     email:"",
@@ -24,8 +23,8 @@ const Register = () => {
 
   return (
     <>
-       <h4>Register to <i>Job</i>Solutions</h4>
-      <img src={Login} alt="login"/>
+       <h4>Welcome back <i>Job</i>Solutions</h4>
+      <img src={Loginimg} alt="login"/>
     <form action="" onSubmit={handleSubmit}>
     <div class="mb-3">
    <label for="exampleFormControlInput1" class="form-label">Email Address</label>
@@ -37,6 +36,7 @@ const Register = () => {
    <input type="password" name="password" value={user.password} onChange={handleInput}
    class="form-control" id="password"/>
    </div>
+   <span>Forgot your password?</span>
    <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
   <label class="form-check-label" for="flexCheckDefault">
@@ -44,10 +44,10 @@ const Register = () => {
   </label>
   </div>
    <input type="button" className="btn btn-lg" value="Register Now"/>
-   <p>Already have an account? <b><i>Sign In</i></b></p>
+   <p>Don't have an account? <b><i>Register</i></b></p>
     </form>
     </>
   );
 };
 
-export default Register;
+export default Login;
