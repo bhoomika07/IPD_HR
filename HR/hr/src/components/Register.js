@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Login from '../img/login.png';
 import "../styling/register.css"
+// import Link from 'react';
 
 const Register = () => {
 
@@ -27,24 +28,24 @@ const Register = () => {
        <h4>Register to <i>Job</i>Solutions</h4>
       <img src={Login} alt="login"/>
     <form action="" onSubmit={handleSubmit}>
-    <div class="mb-3">
-   <label for="exampleFormControlInput1" class="form-label">Email Address</label>
+    <div className="mb-3">
+   <label htmlFor="exampleFormControlInput1" className="form-label">Email Address</label>
    <input type="email" name="email" value={user.email} onChange={handleInput}
-   class="form-control" id="email" placeholder="johndoe@gmail.com"/>
+   className="form-control" id="email" placeholder="johndoe@gmail.com"/>
    </div>
-   <div class="mb-3">
-   <label for="exampleFormControlInput1" class="form-label">Password</label>
+   <div className="mb-3">
+   <label for="exampleFormControlInput1" className="form-label">Password</label>
    <input type="password" name="password" value={user.password} onChange={handleInput}
-   class="form-control" id="password"/>
+   className="form-control" id="password"/>
    </div>
-   <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-  <label class="form-check-label" for="flexCheckDefault">
+   <div className="form-check">
+  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+  <label className="form-check-label" for="flexCheckDefault">
   I am a recruiter. I am here to register my company.
   </label>
   </div>
    <input type="button" className="btn btn-lg" value="Register Now"/>
-   <p>Already have an account? <b><i>Sign In</i></b></p>
+   <p>Already have an account? <b><i>Sign In</i></b>{/*<Link to='/login'>Sign In</Link>*/}</p>
     </form>
     </>
   );

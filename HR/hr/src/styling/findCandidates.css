@@ -1,0 +1,37 @@
+.container h4{
+    text-align: left;
+    margin: 2%;
+}
+.container h4 b{
+    color: #4540DB;
+}
+.container .card{
+    margin-bottom: 2%;
+}
+.container .card .card-header{
+    color: #4540DB;
+    background-color: #fff;
+    font-weight: 800;
+}
+.container .card .card-body select{
+    background-color: #4540DB;
+    color: #fff;
+    padding: 0.3%;
+    border-radius: 5px;
+}
+.container .card .card-body label{
+    margin-left: 0.5%;
+    color: #4540DB;
+    font-weight: 600;
+}
+input[type="button"]{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8%;
+}
+#op1, #op2, #op3, #op4, #opr{
+    margin-bottom: 1%;
+}
