@@ -1,0 +1,31 @@
+.container h4{
+    margin: 3%;
+    text-align: center;
+    color:#4540DB;
+    font-weight: 700;
+}
+.container .card{
+    margin-bottom: 3%;
+}
+.container .card .card-header{
+    color:#4540DB;
+    background-color: #fff;
+    font-size: larger;
+    font-weight: 700;
+}
+input[type="button"]{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8%;
+}
+.container .card .card-body label{
+    margin-left: 0.5%;
+    color: #4540DB;
+    font-weight: 400;
+}
+#op1, #op2,#op3,#op4{
+    margin-bottom: 1%;
+}
