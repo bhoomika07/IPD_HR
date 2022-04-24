@@ -1,15 +1,17 @@
 import './App.css';
+import Records from './components/records';
+// import Confirmation from './components/confirmation';
 // import Register from './components/Register'
 // import FindCandidates from './components/findCandidates';
 // import Login from './components/Login';
-import CreateTest from './components/CreateTest';
+// import CreateTest from './components/CreateTest';
 // import { BrowserRouter as Router, Routes ,Route } from 'react-router-dom';
 
 function App () {
 	
 	return (
 		<div className="container">
-		<CreateTest/>
+		<Records/>
 		</div>
 	// <Router>
 	// 	<div className='container'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styling/findCandidates.css'
 function FindCandidates() {
+    
   return (
     <div className='container'>
         <h4>Welcome, <b>ABC Co. Ltd.</b> Create a job posting now!</h4>
@@ -8,7 +9,7 @@ function FindCandidates() {
         <div className='card'>
             <div className='card-header'>Enter job title for the open position.</div>
             <div className='card-body'>
-            <input type="text" name="jobpos" 
+            <input type="text" name="jobpos"
             className="form-control" id="jobpos" placeholder="eg: Data Analyst"/>
             </div>
         </div>
@@ -23,27 +24,27 @@ function FindCandidates() {
             <div className='card-header'>Enter job description.</div>
             <div className='card-body'>
             <input type="textarea" name="jobdesc" 
-            className="form-control" id="jobdec" placeholder="eg: job: beginner level, need to know python3 and relevant python libraries, etc"/>
+            className="form-control" id="jobdesc" placeholder="eg: job: beginner level, need to know python3 and relevant python libraries, etc"/>
             </div>
         </div>
         <div className='card'>
-            <div className='card-header'>Select pay range.</div>
+            <div className='card-header'>Enter pay range.</div>
             <div className='card-body'>
-            <select value="Select Pay">
-                <option value="Below 15k">Below 15k</option>
-                <option value="15-50k">15-50k</option>
-                <option value="Above 50k">Above 50k</option>
-            </select>
+            <input type="text" name="payrange" 
+            className="form-control" id="payrange" placeholder="eg: 15000"/>
             </div>
         </div>
         <div className='card'>
             <div className='card-header'>Select job type.</div>
             <div className='card-body'>
-            <select value="Select Pay">
-                <option value="Below 15k">Data Analyst</option>
-                <option value="15-50k">App Developer</option>
-                <option value="Above 50k">Web Developer</option>
+            <label>
+                Job Role
+            <select>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="App Developer">App Developer</option>
+                <option value="Web Developer">Web Developer</option>
             </select>
+            </label>
             </div>
         </div>
         <div className='card'>

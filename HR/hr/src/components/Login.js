@@ -9,6 +9,8 @@ const Login = () => {
     password:""
   });
 
+  const [records, setRecords] = useState([]);
+
   const handleInput = (e) =>{
     const name= e.target.name;
     const value = e.target.value;
@@ -19,7 +21,8 @@ const Login = () => {
     e.preventDefault();
 
     const newUser = {...user, id: new Date().getTime().toString()}
-    console.log(newUser);
+    setRecords(...records,newUser)
+    console.log(...records);
   }
 
   return (

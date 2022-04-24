@@ -10,6 +10,8 @@ const Register = () => {
     password:""
   });
 
+  const [records, setRecords] = useState([]);
+
   const handleInput = (e) =>{
     const name= e.target.name;
     const value = e.target.value;
@@ -20,7 +22,8 @@ const Register = () => {
     e.preventDefault();
 
     const newUser = {...user, id: new Date().getTime().toString()}
-    console.log(newUser);
+    setRecords([...records, newUser]);
+    console.log(records);
   }
 
   return (
@@ -48,7 +51,6 @@ const Register = () => {
    <p>Already have an account? <b><i>Sign In</i></b>{/*<Link to='/login'>Sign In</Link>*/}</p>
     </form>
     </>
-  );
-};
+  )};
 
 export default Register;
