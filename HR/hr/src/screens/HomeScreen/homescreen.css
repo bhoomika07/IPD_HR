@@ -1,0 +1,33 @@
+.search_job{
+    font-size: 20px;
+    color: #717171;
+    width:400px;
+    background: #F6F6F6;
+    height: 50px;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    border-radius: 100px; 
+}
+.search_loc{
+    font-size: 20px;
+    color: #717171;
+    width:430px;
+    height: 50px;
+    background: #F6F6F6;
+border: 1px solid #E8E8E8;
+box-sizing: border-box;
+border-radius: 100px;
+}
+.find_btn{
+    height: 51px;
+    width:140px;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+color: #FFFFFF;
+    background: #4540DB;
+border-radius: 10px;
+}
