@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+   'rest_framework.permissions.AllowAny',
+]
+}
 
 # Application definition
 
@@ -39,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'candidate',
     'company',
-    'landing'
+    'landing',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -76,12 +84,19 @@ WSGI_APPLICATION = 'ipd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {  
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'ipddb',  
+        'USER': 'root',  
+        'PASSWORD': 'root',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
+        'OPTIONS': {  
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+        }  
+    }  
+}  
 
 
 # Password validation

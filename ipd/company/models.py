@@ -29,7 +29,6 @@ class question(models.Model):
     testid = models.ForeignKey('test', on_delete=models.CASCADE)
 
 class option(models.Model):
-    oid = models.CharField(primary_key=True, max_length=32)
     qid = models.ForeignKey('question',on_delete=models.CASCADE)
     description = models.CharField(max_length=50)
     correct = models.BooleanField(default = False)
