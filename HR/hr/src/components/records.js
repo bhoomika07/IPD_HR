@@ -1,5 +1,6 @@
 import React from "react";
 import "../styling/records.css";
+
 function Records() {
   return (
     <div className="container container1">
