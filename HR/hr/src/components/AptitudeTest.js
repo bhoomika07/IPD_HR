@@ -1,9 +1,12 @@
 import React from 'react'
 import '../styling/AptitudeTest.css'
+import Timer from '../components/Timer'
+
 function AptitudeTest() {
   return (
     <div className='container'>
       <h4>J.P Stan and Co. - Data Analyst</h4>
+      <Timer hours="0" minutes="60" />
       <form>
         <div className='card'>
             <div className='card-header'>Which of the following is not a multiple of 5?</div>

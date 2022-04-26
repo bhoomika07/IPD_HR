@@ -1,6 +1,6 @@
 import './App.css';
-import Timer from './components/Timer';
-//import AptitudeTest from './components/AptitudeTest';
+// import Timer from './components/Timer';
+import AptitudeTest from './components/AptitudeTest';
 // import Records from './components/records';
 // import Confirmation from './components/confirmation';
 // import Register from './components/Register'
@@ -13,7 +13,7 @@ function App () {
 	
 	return (
 		<div className="container">
-		<Timer/>
+		<AptitudeTest/>
 		</div>
 	// <Router>
 	// 	<div className='container'>
