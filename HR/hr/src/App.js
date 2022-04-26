@@ -1,7 +1,7 @@
 import "./App.css";
 import Timer from "./components/Timer";
 import AptitudeTest from "./components/AptitudeTest";
-import Records from "./components/Records";
+import Records from "./components/records";
 import Confirmation from "./components/confirmation";
 import Register from "./components/Register";
 import FindCandidates from "./components/findCandidates";
