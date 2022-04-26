@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'company',
     'landing',
     'rest_framework',
-    'braces'
 ]
 
 MIDDLEWARE = [

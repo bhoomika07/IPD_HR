@@ -10,7 +10,6 @@ from rest_framework.views import APIView
 from .models import Candidate, Response1, Personality
 from .serializers import CandidateLoginSerializer, CandidateDetailsSerializer, ResponseSerializer, PersonalitySerializer
 from django.views.decorators.csrf import csrf_exempt
-from braces.views import CsrfExemptMixin
 from django.utils.decorators import method_decorator
 
 @api_view(['GET','POST'])
