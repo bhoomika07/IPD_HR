@@ -6,6 +6,6 @@ urlpatterns = [
     path('test/',views.TestAction),
     path('question/',views.QuestionAction),
     path('option/',views.OptionAction),
-    path('companies',views.AllCompDetails)
+    path('companies/',views.AllCompDetails)
    
 ]
