@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import Login from "../img/login.png";
+import axios from "axios";
+import { useNavigate } from "react-router";
 import "../styling/register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
+    name: "",
+    qualification: "",
   });
 
   const [records, setRecords] = useState([]);
@@ -19,9 +24,28 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = { ...user, id: new Date().getTime().toString() };
-    setRecords([...records, newUser]);
-    console.log(records);
+    // const newUser = { ...user, id: new Date().getTime().toString() };
+    // setRecords([...records, newUser]);
+    // console.log(records);
+    axios
+      .post("http://127.0.0.1:8000/cand/candidate/", {
+        data: {
+          cand_email: user.email,
+          cand_name: user.name,
+          cand_qualification: user.qualification,
+          cand_password: user.password,
+        },
+      })
+      .then((res) => {
+        if (res.data.status_code === 0) {
+          navigate("/login");
+        } else {
+          alert(res.data.status_msg);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -58,6 +82,32 @@ const Register = () => {
             id="password"
           />
         </div>
+        <div className="mb-3">
+          <label for="exampleFormControlInput1" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={user.name}
+            onChange={handleInput}
+            className="form-control"
+            id="name"
+          />
+        </div>
+        <div className="mb-3">
+          <label for="exampleFormControlInput1" className="form-label">
+            Qualification
+          </label>
+          <input
+            type="text"
+            name="qualification"
+            value={user.qualification}
+            onChange={handleInput}
+            className="form-control"
+            id="qualification"
+          />
+        </div>
         <div className="form-check">
           <input
             className="form-check-input"
@@ -69,7 +119,9 @@ const Register = () => {
             I am a recruiter. I am here to register my company.
           </label>
         </div>
-        <input type="button" className="btn btn-lg" value="Register Now" />
+        <button type="submit" className="btn btn-primary">
+          Register Now
+        </button>
         <p>
           Already have an account?{" "}
           <b>
