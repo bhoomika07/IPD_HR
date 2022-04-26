@@ -4,7 +4,7 @@ import '../styling/PerformanceDash.css'
 function PerformanceDash() {
   return (
     <div className='container'>
-        <h4>Performance Analysis</h4>
+        <h4>Performance Analysis - <b>John Doe</b></h4>
         <div className='card perf'>
            <div className='card-header'>
                Aptitude Analysis

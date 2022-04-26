@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
 import PerformanceDash from "./components/PerformanceDash";
+import ViewApplications from "./components/viewApplications";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/aptitudeTest" element={<AptitudeTest />} />
             <Route path="/timer" element={<Timer hours="0" minutes="60" />} />
 			<Route path="/performance" element={<PerformanceDash />} />
+			<Route path="/applications" element={<ViewApplications/>} />
           </Routes>
         </div>
       </Router>

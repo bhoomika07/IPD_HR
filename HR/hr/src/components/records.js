@@ -25,7 +25,7 @@ function Records() {
                 <br />
                 Posted 1 day ago
               </td>
-              <td>View Applications</td>
+              <a href="/applications"><td>View Applications</td></a>
               <td>Data Analyst</td>
               <td>
                 <b>May 26, 2021</b>
@@ -44,7 +44,7 @@ function Records() {
                 <br />
                 Posted 2 days ago
               </td>
-              <td>View Applications</td>
+              <a href="/applications"><td>View Applications</td></a>
               <td>Data Scientist</td>
               <td>
                 <b>May 26, 2021</b>

@@ -9,9 +9,9 @@ function Confirmation() {
             <hr className="my-4"/>
                 <div class="row">
                     <div class="col">
-                        <button className="btn btn-success form-control btn-block">YES</button></div>
+                        <a href="/records"><input type="button" className="btn btn-success form-control btn-block" value="YES"/></a></div>
                     <div class="col">
-                    <button className="btn btn-danger form-control  btn-block">NO</button></div>
+                    <a href="/createTest"><input type="button" className="btn btn-danger form-control  btn-block" value="NO"/></a></div>
                 </div>
             </div>
         </form>

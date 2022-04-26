@@ -26,7 +26,7 @@ function CreateTest() {
         </form>
         <h4><b>Added questions:</b></h4>
         <p>What is the average of first multiples of five?</p>
-        <input type="button" className="btn btn-lg" value="Next"/>
+        <a href="/confirmation"><input type="button" className="btn btn-lg" value="Next"/></a>
     </div>
   )
 }
