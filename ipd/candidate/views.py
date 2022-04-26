@@ -12,18 +12,21 @@ from .serializers import CandidateLoginSerializer, CandidateDetailsSerializer, R
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-@api_view(['GET','POST'])
-def CandidateAction( request):
-    if request.method == 'GET':
-        serializer1 = CandidateLoginSerializer(data = request.data)
-        print(serializer1.data)
-        comp_obj = Candidate.objects.get(cand_email = serializer1.data['cand_email'])
-        if comp_obj.cand_password == request.data['cand_password']:
-            return Response(request.data)
+@api_view(['POST'])
+def CandidateActionLogin(request):
+    if request.method == 'POST':
+        comp_obj = Candidate.objects.filter(cand_email = request.data['data']['cand_email'])
+        if comp_obj.exists():
+            if comp_obj[0].cand_password == request.data['data']['cand_password']:
+                return Response({'status_code':0,'status_msg':'Login Successfull'})
+            else:
+                return Response({'status_code':1,'status_msg':'Incorrect password'})
         else:
-            return Response(None)
+            return Response({'status_code':2,'status_msg':'User Dosnt exisits'})
 
-    elif request.method == 'POST':
+@api_view(['GET','POST'])
+def CandidateAction(request):
+    if request.method == 'POST':
         serializer1 =  CandidateDetailsSerializer(data = request.data)
         if serializer1.is_valid():
             serializer1.save()

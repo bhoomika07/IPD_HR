@@ -8,6 +8,7 @@ class Candidate(models.Model):
     cand_qualification = models.CharField(max_length = 200)
 
 class Response1(models.Model):
+    score=models.IntegerField()
     cid = models.ForeignKey('Candidate', on_delete=models.CASCADE)
     testid = models.ForeignKey(test, on_delete=models.CASCADE)
     if_selected = models.BooleanField(default=False)
