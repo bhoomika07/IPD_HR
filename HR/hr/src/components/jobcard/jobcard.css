@@ -1,7 +1,7 @@
 .job_maindiv {
-    width:650px;
-    margin-top: 70px;
-    min-height: 290px;
+  width: 95%;
+  margin-top: 70px;
+  min-height: 290px;
   padding-top: 10px;
   background: #ffffff;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
@@ -21,7 +21,7 @@
 }
 
 .job_title2-text {
-margin: 10px 0 10px 20px;
+  margin: 10px 0 10px 20px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -31,59 +31,57 @@ margin: 10px 0 10px 20px;
   align-items: center;
   color: #717171;
 }
-.job_bluebar{
-    padding-left: 30px;
-    text-align: center;
-    background: #9E9BFF;
-border-radius: 0px 10px 10px 0px;
+.job_bluebar {
+  padding-left: 30px;
+  text-align: center;
+  background: #9e9bff;
+  border-radius: 0px 10px 10px 0px;
 }
-.job_bluebar_text{
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 21px;
-height: 38px;
-display: flex;
-align-items: center;
+.job_bluebar_text {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  height: 38px;
+  display: flex;
+  align-items: center;
 
-color: #000000;
+  color: #000000;
+}
+.job_desc_title {
+  margin: 0px 0 0 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
 
+  color: #717171;
 }
-.job_desc_title{
-    margin: 0px 0 0 20px;
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 23px;
-display: flex;
-align-items: center;
-
-color: #717171;
-
+.job_desc {
+  margin: 5px 10px 0 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #000000;
 }
-.job_desc{
-    margin: 5px 10px 0 20px;
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-display: flex;
-align-items: center;
-color: #000000;
+.job_apply_button {
+  margin: 20px 20px 10px 0;
+  height: 41px;
+  width: 120px;
+  float: right;
+  color: white;
+  border: #ffffff;
+  background: #4540db;
+  border-radius: 10px;
 }
-.job_apply_button{
-    margin: 20px 20px 10px 0;
-    height: 41px;
-    width:120px;
-    float: right;
-    color: white;
-    border:#ffffff;
-    background: #4540DB;
-border-radius: 10px;
-}
-.job_apply_button:focus{
-    outline: grey 3px auto;
+.job_apply_button:focus {
+  outline: grey 3px auto;
 }
