@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Loginimg from "../img/login.png";
 import "../styling/register.css";
+import { useNavigate } from "react-router";
+import axios from "axios";
 const Login = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -17,10 +20,26 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const newUser = { ...user, id: new Date().getTime().toString() };
-    setRecords(...records, newUser);
-    console.log(...records);
+    axios
+      .post("http://127.0.0.1:8000/cand/candidateLogin/", {
+        data: {
+          cand_email: user.email,
+          cand_password: user.password,
+        },
+      })
+      .then((res) => {
+        if (res.data.status_code === 0) {
+          navigate("/");
+        } else {
+          alert(res.data.status_msg);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // const newUser = { ...user, id: new Date().getTime().toString() };
+    // setRecords(...records, newUser);
+    // console.log(...records);
   };
 
   return (
@@ -42,6 +61,7 @@ const Login = () => {
             className="form-control"
             id="email"
             placeholder="johndoe@gmail.com"
+            required
           />
         </div>
         <div className="mb-3">
@@ -49,6 +69,7 @@ const Login = () => {
             Password
           </label>
           <input
+            required
             type="password"
             name="password"
             value={user.password}
@@ -57,8 +78,12 @@ const Login = () => {
             id="password"
           />
         </div>
-        <span>Forgot your password?</span>
-        <div className="form-check">
+
+        <div className="row">
+          <span>Forgot your password?</span>
+        </div>
+
+        {/* <div className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
@@ -68,8 +93,13 @@ const Login = () => {
           <label className="form-check-label" for="flexCheckDefault">
             I am a recruiter. I am here to register my company.
           </label>
+        </div> */}
+        <div className="row">
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
         </div>
-        <input type="button" className="btn btn-lg" value="Register Now" />
+
         <p>
           Don't have an account?<a href="/register">Register</a>
         </p>

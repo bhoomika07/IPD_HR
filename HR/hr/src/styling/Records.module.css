@@ -1,0 +1,15 @@
+.container1 {
+  margin: 5%;
+}
+
+.container1 .card {
+  padding: 3%;
+}
+.container1 h4 b {
+  color: #4540db;
+  font-weight: 700;
+}
+.container1 .card .table th {
+  color: #4540db;
+  font-weight: 700;
+}
