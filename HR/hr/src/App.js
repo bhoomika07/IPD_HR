@@ -12,6 +12,7 @@ import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
 import PerformanceDash from "./components/PerformanceDash";
 import ViewApplications from "./components/viewApplications";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

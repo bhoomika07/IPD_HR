@@ -13,7 +13,7 @@ const Register = () => {
     qualification: "",
   });
 
-  const [records, setRecords] = useState([]);
+  //const [records, setRecords] = useState([]);
 
   const handleInput = (e) => {
     const name = e.target.name;

@@ -21,12 +21,21 @@ function CreateTest() {
                         <input type="text" name="opr" 
             className="form-control" id="opr" placeholder="Enter correct option "/>
             </div>
-            <input type="button" className="btn btn-lg" value="+ Add Question"/>
+            <input type="button" className="btn btn-lg b" value="+ Add Question"/>
         </div>
         </form>
         <h4><b>Added questions:</b></h4>
-        <p>What is the average of first multiples of five?</p>
-        <a href="/confirmation"><input type="button" className="btn btn-lg" value="Next"/></a>
+        <p>What is the average of first multiples of five?
+          {/* <span className='row'>
+            <span className='col'>
+            <input className="btn btn-block btn-lg btn-primary"type="button" value="Edit"/>
+            </span>
+            <span className='col'>
+            <input className="btn btn-block btn-lg btn-danger"type="button" value="Delete"/>
+            </span>
+          </span> */}
+          </p>
+        <a href="/confirmation"><input type="button" className="btn btn-lg b" value="Next"/></a>
     </div>
   )
 }
