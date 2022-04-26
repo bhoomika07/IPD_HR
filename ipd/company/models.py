@@ -5,6 +5,7 @@ class company(models.Model):
     compid = models.CharField(primary_key=True, max_length=200)
     name = models.CharField(max_length=50)
     about = models.CharField(max_length=1000)
+    comp_password = models.CharField(max_length=20)
 
 class job(models.Model):
     jobid = models.CharField(primary_key=True, max_length=100)

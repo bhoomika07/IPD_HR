@@ -4,11 +4,11 @@ from rest_framework import serializers
 class CompanyLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = company
-        fields = ['email' , 'password']
+        fields = ['compid' , 'password']
 
 class CompanyDetailsSerializer(serializers.ModelSerializer):
     class Meta:
-        mdoel = company
+        model = company
         fields = '__all__'
 
 class JobSerializer(serializers.ModelSerializer):
@@ -35,4 +35,3 @@ class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = option
         fields = '__all__'
-

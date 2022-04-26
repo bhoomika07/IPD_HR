@@ -32,7 +32,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
    'rest_framework.permissions.AllowAny',
-]
+], 
 }
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'company',
     'landing',
     'rest_framework',
+    'braces'
 ]
 
 MIDDLEWARE = [

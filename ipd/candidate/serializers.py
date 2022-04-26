@@ -4,11 +4,11 @@ from rest_framework import serializers
 class CandidateLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate
-        fields = ['email' , 'password']
+        fields = ['cand_email' , 'cand_password',]
 
 class CandidateDetailsSerializer(serializers.ModelSerializer):
     class Meta:
-        mdoel = Candidate
+        model = Candidate
         fields = '__all__'
 
 class ResponseSerializer(serializers.ModelSerializer):
