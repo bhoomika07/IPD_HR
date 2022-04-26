@@ -4,7 +4,7 @@ from company.models import test
 class Candidate(models.Model):
     cand_name = models.CharField(max_length=200)
     cand_email = models.CharField(max_length=100, primary_key= True)
-    cand_password = models.CharField(max_length=32)
+    cand_password = models.CharField(max_length=255)
     cand_qualification = models.CharField(max_length = 200)
 
 class Response1(models.Model):

@@ -3,7 +3,7 @@ from urllib import response
 from django import dispatch
 from django.http import HttpResponse
 from django.shortcuts import render
-# Create your views here.
+from django.contrib.auth.hashers import make_password,check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,7 +17,7 @@ def CandidateActionLogin(request):
     if request.method == 'POST':
         comp_obj = Candidate.objects.filter(cand_email = request.data['data']['cand_email'])
         if comp_obj.exists():
-            if comp_obj[0].cand_password == request.data['data']['cand_password']:
+            if check_password(request.data['data']['cand_password'], comp_obj[0].cand_password):
                 return Response({'status_code':0,'status_msg':'Login Successfull'})
             else:
                 return Response({'status_code':1,'status_msg':'Incorrect password'})
@@ -27,13 +27,10 @@ def CandidateActionLogin(request):
 @api_view(['GET','POST'])
 def CandidateAction(request):
     if request.method == 'POST':
-        serializer1 =  CandidateDetailsSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            return Response(serializer1.errors)
-        return Response(serializer1.data)
+        req=request.data['data']
+        candidate=Candidate(cand_email=req['cand_email'],cand_password=make_password(req['cand_password']),cand_qualification=req['cand_qualification'],cand_name=req['cand_name'])
+        candidate.save()
+        return Response({'status_code':0,'status_msg':'Register Successfull'})
 
 @api_view(['GET','POST'])
 @csrf_exempt 
