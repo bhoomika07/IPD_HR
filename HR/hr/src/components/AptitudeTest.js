@@ -5,11 +5,11 @@ import Timer from '../components/Timer'
 function AptitudeTest() {
   return (
     <div className='container'>
-      <h4>J.P Stan and Co. - Data Analyst</h4>
+      <h4 className='tit'>J.P Stan and Co. - Data Analyst</h4>
       <Timer hours="0" minutes="60" />
       <form>
-        <div className='card'>
-            <div className='card-header'>Which of the following is not a multiple of 5?</div>
+        <div className='c card'>
+            <div className='ch card-header'>Which of the following is not a multiple of 5?</div>
             <div className='card-body'>
             <div class="custom-control custom-radio">
                 <input type="radio" id="op1" name="customRadio" class="custom-control-input"/>
@@ -42,7 +42,7 @@ function AptitudeTest() {
             className="form-control" id="op" placeholder="https://www.linkedin.com/in/bhoomika-valani-695b22199/"/>
             </div>
         </div>
-        <input type="button" className="btn btn-lg" value="Submit"/>
+        <input type="button" className="b btn btn-lg" value="Submit"/>
         </form>
     </div>
   )

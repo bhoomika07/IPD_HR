@@ -3,8 +3,8 @@ import '../styling/findCandidates.css'
 
 function CreateTest() {
   return (
-    <div className='container'>
-        <h4>Create your <b> personalised test!</b></h4>
+    <div className='container can'>
+        <h4 className='wel'>Create your <b> personalised test!</b></h4>
         <form>
         <div className='card'>
             <div className='card-header'> <input type="text" name="ques" 

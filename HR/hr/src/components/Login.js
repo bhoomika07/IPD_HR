@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="jobsol">
       <h4>
         Welcome back <i>Job</i>Solutions
       </h4>
@@ -74,7 +74,7 @@ const Login = () => {
           Don't have an account?<a href="/register">Register</a>
         </p>
       </form>
-    </>
+    </div>
   );
 };
 

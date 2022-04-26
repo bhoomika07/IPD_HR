@@ -37,7 +37,7 @@ function Timer({ hours = 0, minutes = 0, seconds = 0 }) {
   });
 
   return (
-    <div className="container">
+    <div className="container timer">
       <p>{`${time.hours
         .toString()
         .padStart(2, "0")}:${time.minutes

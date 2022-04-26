@@ -1,19 +1,19 @@
-.container h4{
+.tit{
     margin: 3%;
     text-align: center;
     color:#4540DB;
     font-weight: 700;
 }
-.container .card{
+.c{
     margin-bottom: 3%;
 }
-.container .card .card-header{
+.ch{
     color:#4540DB;
     background-color: #fff;
     font-size: larger;
     font-weight: 700;
 }
-input[type="button"]{
+.b{
     background: #4540DB;
     border-radius: 5px;
     color: #FFFFFF;

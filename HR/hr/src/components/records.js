@@ -2,7 +2,7 @@ import React from 'react'
 import '../styling/records.css'
 function Records() {
   return (
-    <div className='container'>
+    <div className='container recs'>
         <h4>Hello, <b>ABC Co. Ltd!</b></h4>
         <div className='card'>
         <p>Jobs Posted</p>

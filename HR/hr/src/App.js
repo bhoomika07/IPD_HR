@@ -1,4 +1,3 @@
-
 import "./App.css";
 import Timer from "./components/Timer";
 import AptitudeTest from "./components/AptitudeTest";
@@ -11,6 +10,7 @@ import CreateTest from "./components/CreateTest";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
+import PerformanceDash from "./components/PerformanceDash";
 
 function App() {
   return (
@@ -27,7 +27,8 @@ function App() {
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/records" element={<Records />} />
             <Route path="/aptitudeTest" element={<AptitudeTest />} />
-            <Route path="/timer" element={<Timer />} />
+            <Route path="/timer" element={<Timer hours="0" minutes="60" />} />
+			<Route path="/performance" element={<PerformanceDash />} />
           </Routes>
         </div>
       </Router>

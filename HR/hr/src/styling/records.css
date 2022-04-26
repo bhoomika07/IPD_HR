@@ -1,14 +1,14 @@
-.container {
+.recs {
     margin:5%;
 }
-.container .card{
+.recs .card{
     padding: 3%;
 }
-.container h4 b{
+.recs h4 b{
     color: #4540DB;
     font-weight: 700;
 }
-.container .card .table th{
+.recs .card .table th{
     color:#4540DB;
     font-weight: 700;
 }

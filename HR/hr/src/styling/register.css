@@ -1,28 +1,28 @@
-h4{
+.jobsol h4{
     text-align: center;
     margin: 5%;
     font-weight: 800;
     font-size: 30px;
 }
-i{
+.jobsol i{
     color: #4540DB;
 }
-img{
+.jobsol img{
     float: left;
     width: 50%;
 }
-form{
+.jobsol form{
     float: right;
     align-items: center;
 }
-span{
+.jobsol span{
     margin-bottom: 1%; 
 }
-.form-check{
+.jobsol .form-check{
     margin-top: 5%;
     margin-bottom: 3%;
 }
-input[type="button"]{
+.jobsol input[type="button"]{
     background: #4540DB;
     border-radius: 5px;
     color: #FFFFFF;
@@ -30,6 +30,6 @@ input[type="button"]{
     width: 100%;
     margin-bottom: 8%;
 }
-p{
+.jobsol p{
     text-align: center;
 }

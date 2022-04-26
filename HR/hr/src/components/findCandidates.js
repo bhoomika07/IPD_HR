@@ -3,8 +3,8 @@ import '../styling/findCandidates.css'
 function FindCandidates() {
     
   return (
-    <div className='container'>
-        <h4>Welcome, <b>ABC Co. Ltd.</b> Create a job posting now!</h4>
+    <div className='container can'>
+        <h4 className='wel'>Welcome, <b>ABC Co. Ltd.</b> Create a job posting now!</h4>
         <form>
         <div className='card'>
             <div className='card-header'>Enter job title for the open position.</div>

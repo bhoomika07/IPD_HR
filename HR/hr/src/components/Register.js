@@ -25,7 +25,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div className="jobsol">
       <h4>
         Register to <i>Job</i>Solutions
       </h4>
@@ -79,7 +79,7 @@ const Register = () => {
           </b>
         </p>
       </form>
-    </>
+    </div>
   );
 };
 

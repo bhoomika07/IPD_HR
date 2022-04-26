@@ -4,7 +4,7 @@ function Confirmation() {
   return (
     <div className='container'>
         <form>
-            <div className='card'>
+            <div className='card conf'>
             <h4 className="lead">Your job opening is ready to be posted. Are you sure you want to make it public?</h4>
             <hr className="my-4"/>
                 <div class="row">
