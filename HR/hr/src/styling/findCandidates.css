@@ -32,6 +32,14 @@
     width: 100%;
     margin-bottom: 8%;
 }
+.b{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8%;
+}
 .can #op1, #op2, #op3, #op4, #opr{
     margin-bottom: 1%;
 }

@@ -87,7 +87,7 @@ function FindCandidates() {
         </div>
         </div>
         </form>
-       <a href="/createTest"><input type="button" className="btn btn-lg" value="Next"/></a> 
+       <a href="/createTest"><input type="button" className="btn btn-lg b" value="Next"/></a> 
     </div>
   )
 }
