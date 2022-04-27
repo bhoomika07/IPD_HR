@@ -66,6 +66,7 @@ const Register = () => {
             onChange={handleInput}
             className="form-control"
             id="email"
+            required
             placeholder="johndoe@gmail.com"
           />
         </div>
@@ -77,6 +78,7 @@ const Register = () => {
             type="password"
             name="password"
             value={user.password}
+            required
             onChange={handleInput}
             className="form-control"
             id="password"
@@ -87,6 +89,7 @@ const Register = () => {
             Name
           </label>
           <input
+            required
             type="text"
             name="name"
             value={user.name}
@@ -101,6 +104,7 @@ const Register = () => {
           </label>
           <input
             type="text"
+            required
             name="qualification"
             value={user.qualification}
             onChange={handleInput}
@@ -112,6 +116,7 @@ const Register = () => {
           <input
             className="form-check-input"
             type="checkbox"
+            required
             value=""
             id="flexCheckDefault"
           />
@@ -119,7 +124,12 @@ const Register = () => {
             I am a recruiter. I am here to register my company.
           </label>
         </div>
-        <input type="button" className="btn btn-lg" value="Register Now"/>
+        <input
+          type="submit"
+          className="btn btn-lg"
+          value="Register Now"
+          required
+        />
         <p>
           Already have an account?{" "}
           <b>

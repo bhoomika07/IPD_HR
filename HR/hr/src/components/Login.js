@@ -91,8 +91,9 @@ const Login = () => {
           </label>
         </div> */}
         <div className="row">
-          <input type="button" className="btn btn-lg" value="Login"/>
-        </div><br/>
+          <input type="submit" className="btn btn-lg" value="Login" />
+        </div>
+        <br />
 
         <p>
           Don't have an account? <a href="/register"> Register</a>
