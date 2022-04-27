@@ -1,7 +1,32 @@
-.perf{
-    width:30%;
-}
-.perf b{
+.con b{
     color:#4540DB;
-    font-weight: 300;
+    font-weight: 600;
+}
+.perf{
+    margin:2%;
+}
+.ap{
+    height: 37vh;
+}
+.perf .card-header{
+    color: #4540DB;
+    font-weight: 400;
+}
+.perf .card-body{
+    color: #4540DB;
+    font-weight: 400;
+    text-align: center;
+}
+.perf .card-body p{
+    margin: 6%;
+    font-size: 80px;
+}
+.perf .card-body span{
+    font-size: 100px;
+    font-weight: 800;
+    color: #4540DB;
+}
+.perf .pie{
+    margin-left: 30%;
+    width: 40%;
 }

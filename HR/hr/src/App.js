@@ -2,7 +2,6 @@ import "./App.css";
 import {
   Timer,
   AptitudeTest,
-  Records,
   Confirmation,
   Register,
   FindCandidates,
@@ -11,9 +10,11 @@ import {
   PerformanceDash,
   ViewApplications,
 } from "./components";
+import Records from './components/Records';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

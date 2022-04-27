@@ -24,7 +24,15 @@
     color: #4540DB;
     font-weight: 600;
 }
-.can input[type="button"]{
+.can .b{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8%;
+}
+.b{
     background: #4540DB;
     border-radius: 5px;
     color: #FFFFFF;
