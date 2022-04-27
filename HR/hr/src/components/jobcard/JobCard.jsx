@@ -1,7 +1,7 @@
 import React from 'react';
 import './jobcard.css';
 import {Row,Col} from 'react-bootstrap';
-function JobCard() {
+function JobCard({job}) {
   return (
     <div className="job_maindiv">
         <h1 className='job_title-text'>Data Analyst</h1>
