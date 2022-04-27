@@ -36,9 +36,15 @@ def CompanyAction(request, format = None):
 @api_view(['GET','POST'])
 def JobAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = job.objects.all()
-        serializer1 = JobSerializer(comp_obj, many = True)
-        return Response(serializer1.data)
+        job_objs = job.objects.all()
+        dict0 = {}
+        for job_obj in job_objs:
+            dict1 = model_to_dict(job_obj)
+            compname = company.objects.get(compid = job_obj.compid).name
+            dict1['name'] = compname
+            dict0[job_obj.id] = dict1
+        
+        return JsonResponse(dict0)
 
     elif request.method == 'POST':
         serializer1 =  JobSerializer(data = request.data)
@@ -52,20 +58,23 @@ def JobAction(request, format = None):
 @api_view(['GET','POST'])
 def TestAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = test.objects.get(testid = request.data['testid'])
-        serializer1 = TestSerializer(comp_obj)
-        dict0 = serializer1.data
-        que_objs = question.objects.filter(testid = request.data['testid'])
+        comp_obj = test.objects.get(id = request.data['id'])
+        dict0 = model_to_dict(comp_obj)
+        que_objs = question.objects.filter(testid = request.data['id'])
+        print(que_objs)
+        dict3 = {}
         dict1 = {}
         for q_obj in que_objs:
-            print(q_obj)
-            dict1[q_obj.qid]= model_to_dict(q_obj)
-            opt_objs = option.objects.filter(qid = q_obj.qid)
+            dict1= model_to_dict(q_obj)
+            opt_objs = option.objects.filter(qid = q_obj.id)
             dict2 = {}
+            dict5 = {}
             for o_obj in opt_objs:
-                dict2[o_obj.id] = model_to_dict(o_obj)
-            dict1['options'] = dict2
-        dict0['questions'] = dict1
+                dict2 = model_to_dict(o_obj)
+                dict5 [o_obj.id] = dict2
+            dict1['options'] = dict5
+            dict3[q_obj.id] = dict1
+        dict0['questions'] = dict3
 
         print(dict0)
         return JsonResponse(dict0)
@@ -82,7 +91,7 @@ def TestAction(request, format = None):
 @api_view(['GET','POST'])
 def QuestionAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = question.objects.filter(testid = request.data['testid'])
+        comp_obj = question.objects.filter(id = request.data['id'])
         serializer1 =   QuestionSerializer(comp_obj, many = True)
         return Response(serializer1.data)
     

@@ -1,7 +1,8 @@
 from http.client import ResponseNotReady
 from urllib import response
 from django import dispatch
-from django.http import HttpResponse
+from django.forms import model_to_dict
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password,check_password
 from rest_framework.decorators import api_view
@@ -36,9 +37,15 @@ def CandidateAction(request):
 @csrf_exempt 
 def ResponseAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = Response1.objects.filter(**request.data)
-        serializer1 = ResponseSerializer(comp_obj)
-        return Response(serializer1.data)
+        resp_objs = Response1.objects.filter(**request.data)
+        dict0 = {}
+        for resp_obj in resp_objs:
+            dict1 = model_to_dict(resp_obj)
+            candname = Candidate.objects.get(cand_email = resp_obj.cid)
+            dict1['cand_name'] = candname
+            dict0[resp_obj.id] = dict1
+
+        return JsonResponse(dict0)
 
 
     elif request.method == 'POST':

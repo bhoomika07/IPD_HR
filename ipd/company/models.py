@@ -8,7 +8,7 @@ class company(models.Model):
     comp_password = models.CharField(max_length=20)
 
 class job(models.Model):
-    jobid = models.CharField(primary_key=True, max_length=100)
+    jobname = models.CharField(max_length=100)
     date = models.DateField()
     compid = models.ForeignKey('company', on_delete=models.CASCADE)
     jobdomain = models.CharField(max_length=50)
@@ -20,12 +20,10 @@ class job(models.Model):
     location = models.CharField(max_length=100)
 
 class test(models.Model):
-    testid = models.CharField(primary_key=True, max_length=20)
     jobid = models.ForeignKey('job', on_delete=models.CASCADE)
     instructions = models.CharField(max_length=1000)
 
 class question(models.Model):
-    qid = models.CharField(primary_key=True, max_length=20)
     description = models.CharField(max_length=1000)
     testid = models.ForeignKey('test', on_delete=models.CASCADE)
 
