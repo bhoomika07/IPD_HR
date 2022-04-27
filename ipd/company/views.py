@@ -80,13 +80,37 @@ def TestAction(request, format = None):
         return JsonResponse(dict0)
 
     elif request.method == 'POST':
-        serializer1 =  TestSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            print(serializer1.errors)
-        return Response(serializer1.data)
+        test_obj = test()
+        test_obj.jobid = request.data['jobid']
+        test_obj.instructions = request.data['instructions']
+        test_obj.save()
+        test_obj = test.objects.all()
+        test_id = -1
+        for test_o in test_obj:
+            test_id = test_o.id
+        questions_objs = request.data['questions']
+        for question_obj in questions_objs:
+            q_obj = question()
+            q_obj.testid = test_id
+            q_obj.description = question_obj['description']
+            q_obj.save()
+            q_obj = question.objects.all()
+            q_id = -1
+            for q_o in q_obj:
+                q_id = q_o.id
+            correctopt = int(question_obj['correct']) - 1
+            options_objs = question_obj['options']
+            for i in range(len(options_objs)):
+                option_obj = options_objs[i]
+                o_obj = option()
+                o_obj.qid = q_id
+                o_obj.description = option_obj['description']
+                if correctopt == i:
+                    o_obj.correct = True
+                else:
+                    o_obj.correct = False
+                o_obj.save()
+
     
 @api_view(['GET','POST'])
 def QuestionAction(request, format = None):
