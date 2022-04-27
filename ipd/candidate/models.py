@@ -15,6 +15,7 @@ class Response1(models.Model):
     cv = models.FileField(upload_to='uploads/')
     linkedin = models.CharField(max_length=100)
     pending = models.BooleanField(default=True)
+    suggested_role = models.CharField(max_length=100)
 
 class Personality(models.Model):
     cid = models.ForeignKey('Candidate', on_delete=models.CASCADE)

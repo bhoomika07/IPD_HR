@@ -36,7 +36,7 @@ def CandidateAction(request):
 @csrf_exempt 
 def ResponseAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = Response1.objects.filter(testid = request.data['testid'])
+        comp_obj = Response1.objects.filter(**request.data)
         serializer1 = ResponseSerializer(comp_obj)
         return Response(serializer1.data)
 

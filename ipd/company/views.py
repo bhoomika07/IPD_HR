@@ -1,12 +1,14 @@
 from http.client import ResponseNotReady
 from urllib import response
-from django.http import HttpResponse
+from django.forms import model_to_dict
+from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render
 # Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import company,job, test, question, option
+import json
 
 from .serializers import CompanyLoginSerializer,CompanyDetailsSerializer,JobSerializer,TestSerializer,QuestionSerializer,OptionSerializer
 
@@ -50,9 +52,23 @@ def JobAction(request, format = None):
 @api_view(['GET','POST'])
 def TestAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = test.objects.filter(**request.data)
-        serializer1 = TestSerializer(comp_obj, many = True)
-        return Response(serializer1.data)
+        comp_obj = test.objects.get(testid = request.data['testid'])
+        serializer1 = TestSerializer(comp_obj)
+        dict0 = serializer1.data
+        que_objs = question.objects.filter(testid = request.data['testid'])
+        dict1 = {}
+        for q_obj in que_objs:
+            print(q_obj)
+            dict1[q_obj.qid]= model_to_dict(q_obj)
+            opt_objs = option.objects.filter(qid = q_obj.qid)
+            dict2 = {}
+            for o_obj in opt_objs:
+                dict2[o_obj.id] = model_to_dict(o_obj)
+            dict1['options'] = dict2
+        dict0['questions'] = dict1
+
+        print(dict0)
+        return JsonResponse(dict0)
 
     elif request.method == 'POST':
         serializer1 =  TestSerializer(data = request.data)
