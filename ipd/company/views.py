@@ -62,19 +62,19 @@ def TestAction(request, format = None):
         dict0 = model_to_dict(comp_obj)
         que_objs = question.objects.filter(testid = request.data['id'])
         print(que_objs)
-        dict3 = {}
+        list3 = []
         dict1 = {}
         for q_obj in que_objs:
             dict1= model_to_dict(q_obj)
             opt_objs = option.objects.filter(qid = q_obj.id)
             dict2 = {}
-            dict5 = {}
+            list5 = []
             for o_obj in opt_objs:
                 dict2 = model_to_dict(o_obj)
-                dict5 [o_obj.id] = dict2
-            dict1['options'] = dict5
-            dict3[q_obj.id] = dict1
-        dict0['questions'] = dict3
+                list5.append(dict2)
+            dict1['options'] = list5
+            list3.append(dict1)
+        dict0['questions'] = list3
 
         print(dict0)
         return JsonResponse(dict0)
