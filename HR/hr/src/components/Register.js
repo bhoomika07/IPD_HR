@@ -119,9 +119,7 @@ const Register = () => {
             I am a recruiter. I am here to register my company.
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Register Now
-        </button>
+        <input type="button" className="btn btn-lg" value="Register Now"/>
         <p>
           Already have an account?{" "}
           <b>

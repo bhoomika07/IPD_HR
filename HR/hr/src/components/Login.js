@@ -79,10 +79,6 @@ const Login = () => {
           />
         </div>
 
-        <div className="row">
-          <span>Forgot your password?</span>
-        </div>
-
         {/* <div className="form-check">
           <input
             className="form-check-input"
@@ -95,13 +91,11 @@ const Login = () => {
           </label>
         </div> */}
         <div className="row">
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </div>
+          <input type="button" className="btn btn-lg" value="Login"/>
+        </div><br/>
 
         <p>
-          Don't have an account?<a href="/register">Register</a>
+          Don't have an account? <a href="/register"> Register</a>
         </p>
       </form>
     </div>
