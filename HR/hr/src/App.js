@@ -4,13 +4,13 @@ import {
   AptitudeTest,
   Confirmation,
   Register,
+  Records,
   FindCandidates,
   Login,
   CreateTest,
   PerformanceDash,
   ViewApplications,
 } from "./components";
-import Records from './components/Records';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
