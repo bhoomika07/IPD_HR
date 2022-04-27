@@ -37,14 +37,14 @@ def CompanyAction(request, format = None):
 def JobAction(request, format = None):
     if request.method == 'GET':
         job_objs = job.objects.all()
-        dict0 = {}
+        list0 = []
         for job_obj in job_objs:
             dict1 = model_to_dict(job_obj)
             compname = company.objects.get(compid = job_obj.compid).name
             dict1['name'] = compname
-            dict0[job_obj.id] = dict1
+            list0.append(dict1)
         
-        return JsonResponse(dict0)
+        return JsonResponse(list0)
 
     elif request.method == 'POST':
         serializer1 =  JobSerializer(data = request.data)

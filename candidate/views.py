@@ -12,6 +12,7 @@ from .models import Candidate, Response1, Personality
 from .serializers import CandidateLoginSerializer, CandidateDetailsSerializer, ResponseSerializer, PersonalitySerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from candidate.cv_model import pdf_ocr_ml
 
 @api_view(['POST'])
 def CandidateActionLogin(request):
@@ -38,14 +39,14 @@ def CandidateAction(request):
 def ResponseAction(request, format = None):
     if request.method == 'GET':
         resp_objs = Response1.objects.filter(**request.data)
-        dict0 = {}
+        list0 = []
         for resp_obj in resp_objs:
             dict1 = model_to_dict(resp_obj)
             candname = Candidate.objects.get(cand_email = resp_obj.cid)
             dict1['cand_name'] = candname
-            dict0[resp_obj.id] = dict1
+            list0.append(dict1)
 
-        return JsonResponse(dict0)
+        return JsonResponse(list0)
 
 
     elif request.method == 'POST':
@@ -53,6 +54,11 @@ def ResponseAction(request, format = None):
         if serializer1.is_valid():
             serializer1.save()
             print("stored in db")
+            resp_obj = Response1.objects.get(cid=request.data['cid'])
+            resp_cv = resp_obj.cv
+            output = pdf_ocr_ml(resp_cv)
+            resp_obj.suggested_role = output
+            
         else:
             return Response(None)
         return Response(serializer1.data)
