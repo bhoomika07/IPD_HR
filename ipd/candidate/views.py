@@ -38,14 +38,14 @@ def CandidateAction(request):
 def ResponseAction(request, format = None):
     if request.method == 'GET':
         resp_objs = Response1.objects.filter(**request.data)
-        dict0 = {}
+        list0 = []
         for resp_obj in resp_objs:
             dict1 = model_to_dict(resp_obj)
             candname = Candidate.objects.get(cand_email = resp_obj.cid)
             dict1['cand_name'] = candname
-            dict0[resp_obj.id] = dict1
+            list0.append(dict1)
 
-        return JsonResponse(dict0)
+        return JsonResponse(list0)
 
 
     elif request.method == 'POST':
