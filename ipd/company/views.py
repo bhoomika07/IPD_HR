@@ -34,17 +34,19 @@ def CompanyAction(request, format = None):
         return Response(serializer1.data)
 
 @api_view(['GET','POST'])
-def JobAction(request, format = None):
+def JobAction(request):
     if request.method == 'GET':
         job_objs = job.objects.all()
         list0 = []
         for job_obj in job_objs:
             dict1 = model_to_dict(job_obj)
-            compname = company.objects.get(compid = job_obj.compid).name
-            dict1['name'] = compname
+            # print(job_obj.compid.name)
+            # compname = company.objects.get(compid = job_obj.compid).name
+            dict1['name'] = job_obj.compid.name
+            dict1['testid'] = test.objects.get(jobid = job_obj.id).id
             list0.append(dict1)
         
-        return JsonResponse(list0)
+        return JsonResponse(list0,safe=False)
 
     elif request.method == 'POST':
         serializer1 =  JobSerializer(data = request.data)
@@ -56,12 +58,12 @@ def JobAction(request, format = None):
         return Response(serializer1.data)
 
 @api_view(['GET','POST'])
-def TestAction(request, format = None):
+def TestAction(request,id=0):
     if request.method == 'GET':
-        comp_obj = test.objects.get(id = request.data['id'])
+        comp_obj = test.objects.get(id = id)
         dict0 = model_to_dict(comp_obj)
-        que_objs = question.objects.filter(testid = request.data['id'])
-        print(que_objs)
+        print(request.data)
+        que_objs = question.objects.filter(testid = id)
         list3 = []
         dict1 = {}
         for q_obj in que_objs:
@@ -75,8 +77,6 @@ def TestAction(request, format = None):
             dict1['options'] = list5
             list3.append(dict1)
         dict0['questions'] = list3
-
-        print(dict0)
         return JsonResponse(dict0)
 
     elif request.method == 'POST':
