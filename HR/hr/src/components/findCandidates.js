@@ -126,6 +126,87 @@ function FindCandidates() {
             </label>
           </div>
         </div>
+        <div className="card">
+          <div className="card-header">Ask for LinkedIn.</div>
+          <div className="card-body">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-header">Ask for Candidate CV.</div>
+          <div className="card-body">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-header">Create an evaluation test?</div>
+          <div className="card-body">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
         <input type="submit" className="btn btn-lg b" value="Next" />
       </form>
     </div>
