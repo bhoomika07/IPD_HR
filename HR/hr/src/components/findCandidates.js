@@ -26,24 +26,25 @@ function FindCandidates() {
     axios
       .post("http://127.0.0.1:8000/comp/job/", {
         data: {
-          compid: "compid69",
-          jobid: "jobid1",
+          compid: "cand_email1",
+          // jobid: "jobid1",
           date: "2022-04-01",
-          jobdomain: "Software",
-          experience: 7,
-          minsalary: 100,
-          maxsalary: 1000,
-          description: "Description 1",
-          location: "Mumbai",
+          jobdomain: user.jobdomain,
+          jobname: "Software123",
+          experience: user.experience,
+          minsalary: user.minsalary,
+          maxsalary: user.maxsalary,
+          description: user.description,
+          location: user.location,
         },
       })
       .then((res) => {
         console.log(res.data);
-        // if (res.data.status_code === 0) {
-        //   navigate("/");
-        // } else {
-        //   alert(res.data.status_msg);
-        // }
+        if (res.data.status_code === 0) {
+          navigate("/createTest");
+        } else {
+          alert(res.data.status_msg);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -125,10 +126,8 @@ function FindCandidates() {
             </label>
           </div>
         </div>
+        <input type="submit" className="btn btn-lg b" value="Next" />
       </form>
-      <a href="/createTest">
-        <input type="button" className="btn btn-lg b" value="Next" />
-      </a>
     </div>
   );
 }
