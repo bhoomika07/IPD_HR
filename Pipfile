@@ -8,6 +8,10 @@ django = "*"
 djangorestframework = "*"
 mysqlclient = "*"
 django-cors-headers = "*"
+joblib = "*"
+pandas = "*"
+pymupdf = "*"
+sklearn = "*"
 
 [dev-packages]
 
