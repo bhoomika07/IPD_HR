@@ -40,8 +40,6 @@ def JobAction(request):
         list0 = []
         for job_obj in job_objs:
             dict1 = model_to_dict(job_obj)
-            # print(job_obj.compid.name)
-            # compname = company.objects.get(compid = job_obj.compid).name
             dict1['name'] = job_obj.compid.name
             dict1['testid'] = test.objects.get(jobid = job_obj.id).id
             list0.append(dict1)
@@ -49,21 +47,24 @@ def JobAction(request):
         return JsonResponse(list0,safe=False)
 
     elif request.method == 'POST':
-        serializer1 =  JobSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            return Response(None)
-        return Response(serializer1.data)
+        # serializer1 =  JobSerializer(data = request.data)
+        data=request.data['data']
+        jj=job(location=data['location'], jobname=data['jobname'],compid=company.objects.get(compid=data['compid']),description=data['description'],maxsalary=data['maxsalary'],minsalary=data['minsalary'],experience=data['experience'],jobdomain=data['jobdomain'],date=data['date'])
+        jj.save()
+        # if serializer1.is_valid():
+        #     serializer1.save()
+        #     print("stored in db")
+        # else:
+        #     print("error")
+        #     return Response(None)
+        return Response("stored")
 
 @api_view(['GET','POST'])
-def TestAction(request,id=0):
+def TestAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = test.objects.get(id = id)
+        comp_obj = test.objects.get(id = request.data['id'])
         dict0 = model_to_dict(comp_obj)
-        print(request.data)
-        que_objs = question.objects.filter(testid = id)
+        que_objs = question.objects.filter(testid = request.data['id'])
         list3 = []
         dict1 = {}
         for q_obj in que_objs:

@@ -46,7 +46,7 @@ def ResponseAction(request, format = None):
             dict1['cand_name'] = candname
             list0.append(dict1)
 
-        return JsonResponse(list0)
+        return JsonResponse(list0,safe=False)
 
 
     elif request.method == 'POST':
