@@ -24,7 +24,7 @@ const Navbar = () => {
                 fontWeight: "500",
                 fontSize: "25px",
               }}
-              href="/"
+              href="/home"
             >
               Home
             </a>

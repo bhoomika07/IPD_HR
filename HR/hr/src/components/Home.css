@@ -1,0 +1,15 @@
+.title{
+    margin: 10%;
+}
+.title b{
+    color: #4540DB;
+}
+.bt{
+    background: #4540DB;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 4%;
+    text-decoration: none;
+}

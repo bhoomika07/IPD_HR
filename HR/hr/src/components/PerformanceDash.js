@@ -6,7 +6,7 @@ import { ProgressBar } from 'react-bootstrap';
 function PerformanceDash() {
   return (
     <div className='container con'>
-      <h4>Performance Analysis - <b>John Doe</b></h4><br/>
+      <h4>Performance Analysis - <b>ABC Co. Ltd.</b></h4><br/>
       <div className='row'>
         <div className='col'>
         <div className='card perf ap'>
@@ -14,7 +14,7 @@ function PerformanceDash() {
                Aptitude Analysis
            </div>
            <div className='card-body'>
-               <p><span>14</span>/20</p>
+               <p><span>2</span>/2</p>
            </div>
         </div>
         </div>
@@ -38,9 +38,9 @@ function PerformanceDash() {
       <div className='card-header'>Competitive Analysis</div>
       <div className='card-body'>
         <h5 align="left">Candidate Aptitude Progress</h5>
-      <ProgressBar variant="success" now={40} label={`40%`} /><br/>
+      <ProgressBar variant="success" now={100} label={`100%`} /><br/>
       <h5 align="left">Best Scorer Aptitude Progress</h5>
-      <ProgressBar variant="success" now={90} label={`90%`} /><br/>
+      <ProgressBar variant="success" now={100} label={`100%`} /><br/>
       </div>
       </div>
       <div className='card perf'>

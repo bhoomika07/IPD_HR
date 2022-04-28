@@ -126,7 +126,7 @@ const Register = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-lg"
+          className="btn btn-primary btn-lg btn-block"
           value="Register Now"
           required
         />

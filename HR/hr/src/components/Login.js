@@ -91,7 +91,7 @@ const Login = () => {
           </label>
         </div> */}
         <div className="row">
-          <input type="submit" className="btn btn-lg" value="Login" />
+          <input type="submit" className="btn btn-block btn-primary btn-lg" value="Login" />
         </div>
         <br />
 

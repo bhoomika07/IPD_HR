@@ -5,6 +5,7 @@ import Vector from "./Vector.svg";
 import "./homescreen.css";
 import axios from 'axios';
 
+
 function HomeScreen() {
   const[jobs,setJobs] = useState([])
 useEffect(()=>{
@@ -41,23 +42,11 @@ useEffect(()=>{
           </div>
         </div>
         <Row>
-          {jobs.map(x=>{
+          {jobs && jobs.map(x=>{
             return <Col key={x.compid} style={{ padding: " 0 30px" }} lg={6}>
             <JobCard job={x} />
           </Col>
           })}
-          <Col style={{ padding: " 0 30px" }} lg={6}>
-            <JobCard />
-          </Col>
-          <Col style={{ padding: " 0 30px" }} lg={6}>
-            <JobCard />
-          </Col>
-          <Col style={{ padding: " 0 30px" }} lg={6}>
-            <JobCard />
-          </Col>
-          <Col style={{ padding: " 0 30px" }} lg={6}>
-            <JobCard />
-          </Col>
         </Row>
       </div>
     </div>
