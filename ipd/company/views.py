@@ -65,7 +65,6 @@ def TestAction(request,id=0):
     if request.method == 'GET':
         comp_obj = test.objects.filter(id = id)
         dict0=TestSerializer(comp_obj,many=True).data
-        print(dict0[0])
 
         # comp_obj = test.objects.get(id = request.data['id'])
         # dict0 = model_to_dict(comp_obj)
