@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./details.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function Details() {
   const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState({});
+  const [done, setDone] = useState(false);
+  const [if_selected, set_if_selected] = useState(false);
   useEffect(() => {
     setData(location.state.data);
+    axios
+      .get(
+        `http://127.0.0.1:8000/cand/checkCandidateResult/${
+          location.state.data.testid
+        }/${JSON.parse(localStorage.getItem("uData"))["cand_email"]}`
+      )
+      .then((res) => {
+        setDone(res.data.pending);
+        set_if_selected(res.data.if_selected);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   function starttest() {
@@ -62,9 +78,20 @@ function Details() {
         style={{ marginTop: "100px" }}
         className="d-flex justify-content-center"
       >
-        <button onClick={starttest} className="start_btn">
-          Start Test
-        </button>
+        {!done && (
+          <button onClick={starttest} className="start_btn">
+            Start Test
+          </button>
+        )}
+        {done && if_selected ? (
+          <button disabled className="btn btn-success start_btn">
+            Selected
+          </button>
+        ) : done && !if_selected ? (
+          <button disabled className="btn btn-danger start_btn">
+            Rejected
+          </button>
+        ) : null}
       </div>
     </div>
   );
