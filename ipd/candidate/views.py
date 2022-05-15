@@ -109,6 +109,16 @@ def PersonalityAction( request, format = None):
             return Response(serializer1.data)
         except:
             return Response("Dont bother")            
+@api_view(['GET'])
+def checkCandidateResult( request, tid='',cid=''):
+    if request.method == 'GET':
+        res_obj = Response1.objects.filter(testid=test.objects.get(id=tid),cid=Candidate.objects.get(cand_email=cid))
+        if res_obj.exists():
+            return Response({'status':1,'if_selected':res_obj[0].if_selected,'pending':res_obj[0].pending})
+        else:
+            return Response({'status':0})
+
+                  
     
 
     

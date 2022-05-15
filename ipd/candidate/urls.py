@@ -7,4 +7,5 @@ urlpatterns = [
     path('personality/',views.PersonalityAction),
     path('getPostings/<str:id>/',views.CandidatePostingAction),
     path('getUpdatePostings/<str:id>/',views.CompanyPostingUpdateAction),
+    path('checkCandidateResult/<str:tid>/<str:cid>/',views.checkCandidateResult),
 ]
