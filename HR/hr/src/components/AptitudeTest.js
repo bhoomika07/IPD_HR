@@ -44,7 +44,7 @@ function AptitudeTest() {
     );
     formData.append("testid", location.state.id);
     formData.append("linkedin", "asasdads");
-    formData.append("score", Math.ceil(c / total) * 100);
+    formData.append("score", Math.ceil((c * 100) / total));
     formData.append("cv", selectedFile);
     formData.append("compid", location.state.compid);
     axios
@@ -72,7 +72,7 @@ function AptitudeTest() {
                   name={q.question}
                   value={q.option1.marks}
                 />
-                <label htmlFor={"option1"}> {q.option1.title} </label>
+                <label htmlFor={q.question}> {q.option1.title} </label>
               </div>
               <div className="card-body">
                 <input
@@ -81,7 +81,7 @@ function AptitudeTest() {
                   name={q.question}
                   value={q.option2.marks}
                 />
-                <label htmlFor={"option2"}> {q.option2.title} </label>
+                <label htmlFor={q.question}> {q.option2.title} </label>
               </div>
               <div className="card-body">
                 <input
@@ -90,7 +90,7 @@ function AptitudeTest() {
                   name={q.question}
                   value={q.option3.marks}
                 />
-                <label htmlFor={"option3"}> {q.option3.title} </label>
+                <label htmlFor={q.question}> {q.option3.title} </label>
               </div>
               <div className="card-body">
                 <input
@@ -99,7 +99,7 @@ function AptitudeTest() {
                   name={q.question}
                   value={q.option4.marks}
                 />
-                <label htmlFor={"option4"}> {q.option4.title} </label>
+                <label htmlFor={q.question}> {q.option4.title} </label>
               </div>
             </div>
           );
