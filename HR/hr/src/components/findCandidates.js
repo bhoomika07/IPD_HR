@@ -26,7 +26,7 @@ function FindCandidates() {
     axios
       .post("http://127.0.0.1:8000/comp/job/", {
         data: {
-          compid: "cand_email1",
+          compid: JSON.parse(localStorage.getItem("uData"))["compid"],
           // jobid: "jobid1",
           date: "2022-04-01",
           jobdomain: user.jobdomain,
@@ -41,7 +41,7 @@ function FindCandidates() {
       .then((res) => {
         console.log(res.data);
         if (res.data.status_code === 0) {
-          navigate("/createTest");
+          navigate("/createTest", { state: { jobid: res.data.data.jobid } });
         } else {
           alert(res.data.status_msg);
         }
@@ -57,7 +57,8 @@ function FindCandidates() {
   return (
     <div className="container can">
       <h4 className="wel">
-        Welcome, <b>ABC Co. Ltd.</b> Create a job posting now!
+        Welcome, <b>{JSON.parse(localStorage.getItem("uData"))["name"]}</b>{" "}
+        Create a job posting now!
       </h4>
       <form onSubmit={handleSubmit}>
         {console.log(user)}
@@ -134,9 +135,9 @@ function FindCandidates() {
                 class="form-check-input"
                 type="radio"
                 name="flexRadioDefault"
-                id="flexRadioDefault1"
+                id="flexRadioDefault"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault">
                 Yes
               </label>
             </div>
@@ -145,9 +146,9 @@ function FindCandidates() {
                 class="form-check-input"
                 type="radio"
                 name="flexRadioDefault"
-                id="flexRadioDefault1"
+                id="flexRadioDefault"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault">
                 No
               </label>
             </div>
@@ -160,7 +161,7 @@ function FindCandidates() {
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
+                name="flexRadioDefault1"
                 id="flexRadioDefault1"
               />
               <label class="form-check-label" for="flexRadioDefault1">
@@ -171,7 +172,7 @@ function FindCandidates() {
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
+                name="flexRadioDefault1"
                 id="flexRadioDefault1"
               />
               <label class="form-check-label" for="flexRadioDefault1">
@@ -187,10 +188,10 @@ function FindCandidates() {
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="flexRadioDefault2"
+                id="flexRadioDefault2"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault2">
                 Yes
               </label>
             </div>
@@ -198,10 +199,10 @@ function FindCandidates() {
               <input
                 class="form-check-input"
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="flexRadioDefault2"
+                id="flexRadioDefault2"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault2">
                 No
               </label>
             </div>

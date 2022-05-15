@@ -6,6 +6,7 @@ import "../styling/register.css";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isCompany, setIsCompany] = useState(0);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -27,15 +28,31 @@ const Register = () => {
     // const newUser = { ...user, id: new Date().getTime().toString() };
     // setRecords([...records, newUser]);
     // console.log(records);
+    let data = {};
+    if (!isCompany) {
+      data = {
+        cand_email: user.email,
+        cand_name: user.name,
+        cand_qualification: user.qualification,
+        cand_password: user.password,
+      };
+    } else {
+      data = {
+        compid: user.email,
+        name: user.name,
+        about: user.qualification,
+        comp_password: user.password,
+      };
+    }
     axios
-      .post("http://127.0.0.1:8000/cand/candidate/", {
-        data: {
-          cand_email: user.email,
-          cand_name: user.name,
-          cand_qualification: user.qualification,
-          cand_password: user.password,
-        },
-      })
+      .post(
+        `http://127.0.0.1:8000/${
+          isCompany ? "comp/company/" : "cand/candidate/"
+        }`,
+        {
+          data: data,
+        }
+      )
       .then((res) => {
         if (res.data.status_code === 0) {
           navigate("/login");
@@ -100,7 +117,7 @@ const Register = () => {
         </div>
         <div className="mb-3">
           <label for="exampleFormControlInput1" className="form-label">
-            Qualification
+            {isCompany ? "About" : "Qualification"}
           </label>
           <input
             type="text"
@@ -116,7 +133,7 @@ const Register = () => {
           <input
             className="form-check-input"
             type="checkbox"
-            required
+            onChange={(e) => setIsCompany(!isCompany)}
             value=""
             id="flexCheckDefault"
           />

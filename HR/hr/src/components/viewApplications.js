@@ -4,7 +4,7 @@ function ViewApplications() {
   return (
     <div className="container container1">
       <h4>
-        Hello, <b>ABC Co. Ltd!</b>
+        Hello, <b>{JSON.parse(localStorage.getItem("uData"))["name"]}</b>
       </h4>
       <div className="card">
         <p>Jobs Posted</p>
@@ -23,7 +23,9 @@ function ViewApplications() {
               <td>
                 <b>John Doe</b>
               </td>
-              <a href="/performance"><td>View Dashboard</td></a>
+              <a href="/performance">
+                <td>View Dashboard</td>
+              </a>
               <td>Data Analyst</td>
               <td>
                 <b>May 26, 2021</b>
@@ -31,15 +33,15 @@ function ViewApplications() {
                 6:30pm
               </td>
               <td className="row">
-                  <div className="col">
+                <div className="col">
                   <button className="btn btn-success form-control btn-block">
-                  ACCEPT
-                </button>
-                  </div>
-                  <div className="col">
-                <button className="btn btn-danger form-control btn-block">
-                  REJECT
-                </button>
+                    ACCEPT
+                  </button>
+                </div>
+                <div className="col">
+                  <button className="btn btn-danger form-control btn-block">
+                    REJECT
+                  </button>
                 </div>
               </td>
             </tr>

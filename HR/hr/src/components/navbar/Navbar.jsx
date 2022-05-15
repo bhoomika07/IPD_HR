@@ -3,8 +3,10 @@ import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import JobSolutions from "../../JobSolutions.svg";
 import Vector39 from "../../Vector39.svg";
 import "./navbar.css";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
@@ -66,6 +68,15 @@ const Navbar = () => {
             Register Now
           </a>
         </button>
+        <button
+          onClick={(e) => {
+            localStorage.clear();
+            navigate("/home");
+          }}
+          type="button"
+        >
+          Logout
+        </button>
       </div>
       <div className="gpt3__navbar-menu">
         {toggleMenu ? (
@@ -97,7 +108,7 @@ const Navbar = () => {
                   style={{ textDecoration: "none", fontSize: "20px" }}
                   href="/findCandidates"
                 >
-                  Find Jobs
+                  Find Jobss
                 </a>
               </p>
               <p>
@@ -113,6 +124,15 @@ const Navbar = () => {
               <a href="/login">Log in</a>
               <button type="button">
                 <a href="/register">Register Now</a>
+              </button>
+              <button
+                onClick={(e) => {
+                  localStorage.clear();
+                  navigate("/home");
+                }}
+                type="button"
+              >
+                Logout
               </button>
             </div>
           </div>

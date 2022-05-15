@@ -17,13 +17,13 @@ import Applications2 from "./components/Applications2";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="container">
-      <Navbar />
       <Router>
+        <Navbar />
         <div className="container">
           <Routes>
             <Route path="/" element={<HomeScreen />} />

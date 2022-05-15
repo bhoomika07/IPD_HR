@@ -29,7 +29,14 @@ const Login = () => {
       })
       .then((res) => {
         if (res.data.status_code === 0) {
-          navigate("/");
+          localStorage.setItem("uData", JSON.stringify(res.data.data[0]));
+          if (res.data.comp === 0) {
+            // if user
+            navigate("/");
+          } else {
+            // if company
+            navigate("/applications");
+          }
         } else {
           alert(res.data.status_msg);
         }
@@ -91,7 +98,11 @@ const Login = () => {
           </label>
         </div> */}
         <div className="row">
-          <input type="submit" className="btn btn-block btn-primary btn-lg" value="Login" />
+          <input
+            type="submit"
+            className="btn btn-block btn-primary btn-lg"
+            value="Login"
+          />
         </div>
         <br />
 
