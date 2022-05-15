@@ -1,6 +1,6 @@
 from django.db import models
-from company.models import test
 from candidate.cv_model import pdf_ocr_ml
+from company.models import *
 
 # Create your models here.
 class Candidate(models.Model):
@@ -11,6 +11,7 @@ class Candidate(models.Model):
 
 class Response1(models.Model):
     score=models.IntegerField()
+    compid=models.ForeignKey(company, on_delete=models.CASCADE,null=True,blank=True)
     cid = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     testid = models.ForeignKey(test, on_delete=models.CASCADE)
     if_selected = models.BooleanField(default=False)

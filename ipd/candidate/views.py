@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Candidate, Response1, Personality
-from .serializers import CandidateLoginSerializer, CandidateDetailsSerializer, ResponseSerializer, PersonalitySerializer
+from .serializers import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from candidate.cv_model import pdf_ocr_ml
@@ -42,6 +42,32 @@ def CandidateAction(request):
         candidate=Candidate(cand_email=req['cand_email'],cand_password=make_password(req['cand_password']),cand_qualification=req['cand_qualification'],cand_name=req['cand_name'])
         candidate.save()
         return Response({'status_code':0,'status_msg':'Register Successfull'})
+@api_view(['GET'])
+def CandidatePostingAction(request,id=''):
+    if request.method == 'GET':
+        userR=Response1.objects.filter(cid=Candidate.objects.get(cand_email=id))
+        if userR.exists:
+            userR=Response1Serializer(userR,many=True).data
+        # candidate=Candidate(cand_email=req['cand_email'],cand_password=make_password(req['cand_password']),cand_qualification=req['cand_qualification'],cand_name=req['cand_name'])
+        # candidate.save()
+        return Response({'data':userR})
+@api_view(['GET'])
+def CompanyPostingAction(request,id=''):
+    if request.method == 'GET':
+        response1=Response1.objects.filter(compid=company.objects.get(compid=id))
+        userR=Response2Serializer(response1,many=True).data
+        return Response({'data':userR})
+
+@api_view(['POST'])
+def CompanyPostingUpdateAction(request,id=0):
+    if request.method == 'POST':
+        req=request.data['data']
+        response1=Response1.objects.get(id=id)
+        response1.if_selected=req['flag']
+        response1.pending=True
+        response1.save()
+        return Response({'status_code':0,'stats_msg':'Updated Successfully'})
+
 
 @api_view(['GET','POST'])
 @csrf_exempt 
@@ -61,8 +87,10 @@ def ResponseAction(request, format = None):
     elif request.method == 'POST':
         serializer1 =  ResponseSerializer(data = request.data)       
         if serializer1.is_valid():
-            serializer1.save()
-            resp_obj = Response1.objects.get(cid=request.data['cid'])
+            resp_obj = Response1.objects.filter(cid=request.data['cid'],testid=request.data['testid'])
+            if not resp_obj.exists():
+                serializer1.save()
+            resp_obj=resp_obj[0]
             resp_cv = resp_obj.cv
             output = pdf_ocr_ml(resp_cv)
             resp_obj.suggested_role = output
