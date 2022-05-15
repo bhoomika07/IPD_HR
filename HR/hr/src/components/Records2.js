@@ -5,7 +5,7 @@ function Records2() {
   return (
     <div className="container container1">
       <h4>
-        Hello, <b>Alan!</b>
+        Hello, <b>{JSON.parse(localStorage.getItem("uData"))["cand_name"]}</b>
       </h4>
       <div className="card">
         <p>Jobs Posted</p>
@@ -26,7 +26,9 @@ function Records2() {
                 <br />
                 Posted 1 day ago
               </td>
-              <a href="/performance"><td>View Result</td></a>
+              <a href="/performance">
+                <td>View Result</td>
+              </a>
               <td>Data Analyst</td>
               <td>
                 <b>May 26, 2021</b>
@@ -45,7 +47,9 @@ function Records2() {
                 <br />
                 Posted 2 days ago
               </td>
-              <a href="/performance"><td>View Result</td></a>
+              <a href="/performance">
+                <td>View Result</td>
+              </a>
               <td>Data Scientist</td>
               <td>
                 <b>May 26, 2021</b>
