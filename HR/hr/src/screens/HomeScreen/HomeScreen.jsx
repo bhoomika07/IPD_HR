@@ -12,7 +12,6 @@ function HomeScreen() {
       await axios
         .get("http://127.0.0.1:8000/comp/job/")
         .then((res) => {
-          console.log(res.data);
           setJobs(res.data);
         })
         .catch((e) => console.log(e));

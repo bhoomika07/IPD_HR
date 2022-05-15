@@ -39,7 +39,6 @@ function FindCandidates() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.status_code === 0) {
           navigate("/createTest", { state: { jobid: res.data.data.jobid } });
         } else {

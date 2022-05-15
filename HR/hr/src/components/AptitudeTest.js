@@ -20,7 +20,6 @@ function AptitudeTest() {
       await axios
         .get(`http://127.0.0.1:8000/comp/test/${location.state.id}`)
         .then((res) => {
-          console.log(res.data);
           setQs(res.data.jsonData);
         })
         .catch((e) => console.log(e));
@@ -38,7 +37,6 @@ function AptitudeTest() {
       c = c + parseInt(checkboxes[i].value);
       total = total + 2;
     }
-    console.log(total);
     let formData = new FormData();
     formData.append(
       "cid",
