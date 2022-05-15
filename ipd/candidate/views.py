@@ -8,11 +8,14 @@ from django.contrib.auth.hashers import make_password,check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import Candidate, Response1, Personality
 from .serializers import CandidateLoginSerializer, CandidateDetailsSerializer, ResponseSerializer, PersonalitySerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from candidate.cv_model import pdf_ocr_ml
+from company.models import company
+from company.serializers import *
 
 @api_view(['POST'])
 def CandidateActionLogin(request):
@@ -20,10 +23,16 @@ def CandidateActionLogin(request):
         comp_obj = Candidate.objects.filter(cand_email = request.data['data']['cand_email'])
         if comp_obj.exists():
             if check_password(request.data['data']['cand_password'], comp_obj[0].cand_password):
-                return Response({'status_code':0,'status_msg':'Login Successfull'})
+                return Response({'status_code':0,'comp':0,'status_msg':'Login Successfull','data':CandidateDetailsSerializer(comp_obj,many=True).data})
             else:
                 return Response({'status_code':1,'status_msg':'Incorrect password'})
         else:
+            comp_obj = company.objects.filter(compid = request.data['data']['cand_email'])
+            if(comp_obj.exists()):
+                if check_password(request.data['data']['cand_password'], comp_obj[0].comp_password):
+                    return Response({'status_code':0,'comp':1,'status_msg':'Login Successfull','data':CompanyDetailsSerializer(comp_obj,many=True).data})
+                else:
+                    return Response({'status_code':1,'status_msg':'Incorrect password'})
             return Response({'status_code':2,'status_msg':'User Dosnt exisits'})
 
 @api_view(['GET','POST'])

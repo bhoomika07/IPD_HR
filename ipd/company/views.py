@@ -7,7 +7,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.parsers import JSONParser
 from .models import company,job, test, question, option
+from django.contrib.auth.hashers import make_password,check_password
 import json
 
 from .serializers import CompanyLoginSerializer,CompanyDetailsSerializer,JobSerializer,TestSerializer,QuestionSerializer,OptionSerializer
@@ -25,13 +27,11 @@ def CompanyAction(request, format = None):
             return Response("No User Found")
 
     elif request.method == 'POST':
-        serializer1 =  CompanyDetailsSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            return Response(None)
-        return Response(serializer1.data)
+        req=request.data['data']
+        candidate=company(compid=req['compid'],comp_password=make_password(req['comp_password']),about=req['about'],name=req['name'])
+        candidate.save()
+        print("stored in db")
+        return Response({'status_code':0,'status_msg':'Register Successfull'})
 
 @api_view(['GET','POST'])
 def JobAction(request):
@@ -57,7 +57,7 @@ def JobAction(request):
         # else:
         #     print("error")
         #     return Response(None)
-        return Response("stored")
+        return Response({'status_code':0,'status_msg':'Login Successfull','data':{'jobid':jj.id}})
 
 @api_view(['GET','POST'])
 def TestAction(request, format = None):
@@ -81,36 +81,40 @@ def TestAction(request, format = None):
         return JsonResponse(dict0)
 
     elif request.method == 'POST':
-        test_obj = test()
-        test_obj.jobid = request.data['jobid']
-        test_obj.instructions = request.data['instructions']
-        test_obj.save()
-        test_obj = test.objects.all()
-        test_id = -1
-        for test_o in test_obj:
-            test_id = test_o.id
-        questions_objs = request.data['questions']
-        for question_obj in questions_objs:
-            q_obj = question()
-            q_obj.testid = test_id
-            q_obj.description = question_obj['description']
-            q_obj.save()
-            q_obj = question.objects.all()
-            q_id = -1
-            for q_o in q_obj:
-                q_id = q_o.id
-            correctopt = int(question_obj['correct']) - 1
-            options_objs = question_obj['options']
-            for i in range(len(options_objs)):
-                option_obj = options_objs[i]
-                o_obj = option()
-                o_obj.qid = q_id
-                o_obj.description = option_obj['description']
-                if correctopt == i:
-                    o_obj.correct = True
-                else:
-                    o_obj.correct = False
-                o_obj.save()
+        data=JSONParser().parse(request)['data']
+        tesst=test(jsonData=data['jsonData'],jobid=job.objects.get(id=data['jobid']),instructions=data['instructions'])
+        tesst.save()
+        # test_obj = test()
+        # test_obj.jobid = request.data['jobid']
+        # test_obj.instructions = request.data['instructions']
+        # test_obj.save()
+        # test_obj = test.objects.all()
+        # test_id = -1
+        # for test_o in test_obj:
+        #     test_id = test_o.id
+        # questions_objs = request.data['questions']
+        # for question_obj in questions_objs:
+        #     q_obj = question()
+        #     q_obj.testid = test_id
+        #     q_obj.description = question_obj['description']
+        #     q_obj.save()
+        #     q_obj = question.objects.all()
+        #     q_id = -1
+        #     for q_o in q_obj:
+        #         q_id = q_o.id
+        #     correctopt = int(question_obj['correct']) - 1
+        #     options_objs = question_obj['options']
+        #     for i in range(len(options_objs)):
+        #         option_obj = options_objs[i]
+        #         o_obj = option()
+        #         o_obj.qid = q_id
+        #         o_obj.description = option_obj['description']
+        #         if correctopt == i:
+        #             o_obj.correct = True
+        #         else:
+        #             o_obj.correct = False
+        #         o_obj.save()
+        return Response({'status_code':0,'status_msg':'Test Created','data':{'testid':tesst.id}})
 
     
 @api_view(['GET','POST'])
