@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styling/records.css";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Records2() {
+  const navigate = useNavigate();
+  const [Data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8000/cand/getPostings/${
+          JSON.parse(localStorage.getItem("uData"))["cand_email"]
+        }/`
+      )
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return () => {};
+  }, []);
+
   return (
     <div className="container container1">
       <h4>
@@ -20,48 +41,56 @@ function Records2() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <b>ABC Co. Ltd.</b>
-                <br />
-                Posted 1 day ago
-              </td>
-              <a href="/performance">
-                <td>View Result</td>
-              </a>
-              <td>Data Analyst</td>
-              <td>
-                <b>May 26, 2021</b>
-                <br />
-                6:30pm
-              </td>
-              <td>
-                <button className="btn btn-success form-control btn-block">
-                  Accepted
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>Google</b>
-                <br />
-                Posted 2 days ago
-              </td>
-              <a href="/performance">
-                <td>View Result</td>
-              </a>
-              <td>Data Scientist</td>
-              <td>
-                <b>May 26, 2021</b>
-                <br />
-                7:30pm
-              </td>
-              <td>
-                <button className="btn btn-warning form-control btn-block">
-                  Pending
-                </button>
-              </td>
-            </tr>
+            {Data.length !== 0 &&
+              Data.map((data) => {
+                return (
+                  <tr>
+                    <td>
+                      <b>{data.comp_name}</b>
+                      <br />
+                      {/* {data.job_date} */}
+                    </td>
+
+                    <td
+                      style={{ color: "blue", cursor: "pointer" }}
+                      onClick={(e) => {
+                        navigate("/performance", {
+                          state: {
+                            score: data.score,
+                            comp_name: data.comp_name,
+                          },
+                        });
+                      }}
+                    >
+                      View Result
+                    </td>
+
+                    <td>{data.job_role}</td>
+                    <td>
+                      <b>{data.job_date}</b>
+                      <br />
+                      {/* 6:30pm */}
+                    </td>
+                    <td>
+                      <button
+                        className={
+                          !data.pending
+                            ? "btn btn-warning form-control btn-block"
+                            : data.if_selected
+                            ? "btn btn-success form-control btn-block"
+                            : "btn btn-danger form-control btn-block"
+                        }
+                      >
+                        {!data.pending
+                          ? "Pending"
+                          : data.if_selected
+                          ? "Accepted"
+                          : "Rejected"}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

@@ -13,24 +13,35 @@ import {
 } from "./components";
 import Home from "./components/Home";
 import Records2 from "./components/Records2";
-import Applications2 from "./components/Applications2";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomeScreen, Details } from "./screens";
 import { Navbar } from "./components";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const [isLogout, setIsLogout] = useState(true);
+  useEffect(() => {
+    setIsLogout(
+      JSON.parse(localStorage.getItem("uData")) !== null ? false : true
+    );
+
+    return () => {};
+  }, []);
+
   return (
     <div className="container">
       <Router>
-        <Navbar />
+        <Navbar isLogout={isLogout} setIsLogout={setIsLogout} />
         <div className="container">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={<Login isLogout={isLogout} setIsLogout={setIsLogout} />}
+            />
             <Route path="/home" element={<Home />} />
-            <Route path="/app2" element={<Applications2 />} />
             <Route path="/details" element={<Details />} />
             <Route path="/findCandidates" element={<FindCandidates />} />
             <Route path="/createTest" element={<CreateTest />} />

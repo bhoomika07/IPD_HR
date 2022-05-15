@@ -3,7 +3,7 @@ import Loginimg from "../img/login.png";
 import "../styling/register.css";
 import { useNavigate } from "react-router";
 import axios from "axios";
-const Login = () => {
+const Login = ({ isLogout, setIsLogout }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -29,6 +29,8 @@ const Login = () => {
       })
       .then((res) => {
         if (res.data.status_code === 0) {
+          setIsLogout(false);
+          localStorage.setItem("isLogout", false);
           localStorage.setItem("uData", JSON.stringify(res.data.data[0]));
           if (res.data.comp === 0) {
             // if user

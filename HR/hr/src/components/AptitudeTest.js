@@ -48,6 +48,7 @@ function AptitudeTest() {
     formData.append("linkedin", "asasdads");
     formData.append("score", Math.ceil(c / total) * 100);
     formData.append("cv", selectedFile);
+    formData.append("compid", location.state.compid);
     axios
       .post("http://localhost:8000/cand/response/", formData)
       .then((res) => {
