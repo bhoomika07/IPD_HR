@@ -12,6 +12,7 @@ from .models import company,job, test, question, option
 from django.contrib.auth.hashers import make_password,check_password
 import json
 
+
 from .serializers import CompanyLoginSerializer,CompanyDetailsSerializer,JobSerializer,TestSerializer,QuestionSerializer,OptionSerializer
 
 @api_view(['GET','POST'])
@@ -60,25 +61,29 @@ def JobAction(request):
         return Response({'status_code':0,'status_msg':'Login Successfull','data':{'jobid':jj.id}})
 
 @api_view(['GET','POST'])
-def TestAction(request, format = None):
+def TestAction(request,id=0):
     if request.method == 'GET':
-        comp_obj = test.objects.get(id = request.data['id'])
-        dict0 = model_to_dict(comp_obj)
-        que_objs = question.objects.filter(testid = request.data['id'])
-        list3 = []
-        dict1 = {}
-        for q_obj in que_objs:
-            dict1= model_to_dict(q_obj)
-            opt_objs = option.objects.filter(qid = q_obj.id)
-            dict2 = {}
-            list5 = []
-            for o_obj in opt_objs:
-                dict2 = model_to_dict(o_obj)
-                list5.append(dict2)
-            dict1['options'] = list5
-            list3.append(dict1)
-        dict0['questions'] = list3
-        return JsonResponse(dict0)
+        comp_obj = test.objects.filter(id = id)
+        dict0=TestSerializer(comp_obj,many=True).data
+        print(dict0[0])
+
+        # comp_obj = test.objects.get(id = request.data['id'])
+        # dict0 = model_to_dict(comp_obj)
+        # que_objs = question.objects.filter(testid = request.data['id'])
+        # list3 = []
+        # dict1 = {}
+        # for q_obj in que_objs:
+        #     dict1= model_to_dict(q_obj)
+        #     opt_objs = option.objects.filter(qid = q_obj.id)
+        #     dict2 = {}
+        #     list5 = []
+        #     for o_obj in opt_objs:
+        #         dict2 = model_to_dict(o_obj)
+        #         list5.append(dict2)
+        #     dict1['options'] = list5
+        #     list3.append(dict1)
+        # dict0['questions'] = list3
+        return JsonResponse(dict0[0])
 
     elif request.method == 'POST':
         data=JSONParser().parse(request)['data']

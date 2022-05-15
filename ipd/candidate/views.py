@@ -59,17 +59,17 @@ def ResponseAction(request, format = None):
 
 
     elif request.method == 'POST':
-        serializer1 =  ResponseSerializer(data = request.data)
+        serializer1 =  ResponseSerializer(data = request.data)       
         if serializer1.is_valid():
             serializer1.save()
-            print("stored in db")
             resp_obj = Response1.objects.get(cid=request.data['cid'])
             resp_cv = resp_obj.cv
             output = pdf_ocr_ml(resp_cv)
             resp_obj.suggested_role = output
+            resp_obj.save()         
             
         else:
-            return Response(None)
+            return Response('h')
         return Response(serializer1.data)
 
 @api_view(['GET'])
