@@ -1,6 +1,7 @@
 from django.db import models
-from company.models import test
+from numpy import require
 from candidate.cv_model import pdf_ocr_ml
+from company.models import *
 
 # Create your models here.
 class Candidate(models.Model):
@@ -11,18 +12,19 @@ class Candidate(models.Model):
 
 class Response1(models.Model):
     score=models.IntegerField()
-    cid = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    compid=models.ForeignKey(company, on_delete=models.CASCADE,null=True,blank=True)
+    cid = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     testid = models.ForeignKey(test, on_delete=models.CASCADE)
     if_selected = models.BooleanField(default=False)
-    cv = models.FileField(upload_to='uploads/')
+    cv = models.FileField(upload_to='uploads/', null = True)
     linkedin = models.CharField(max_length=100)
-    pending = models.BooleanField(default=True)
+    pending = models.BooleanField(default=False)
     suggested_role =""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        resp_cv = self.cv
-        output = pdf_ocr_ml(resp_cv)
-        self.suggested_role = output
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     resp_cv = self.cv
+    #     output = pdf_ocr_ml(resp_cv)
+    #     self.suggested_role = output
 
 class Personality(models.Model):
     cid = models.ForeignKey('Candidate', on_delete=models.CASCADE)

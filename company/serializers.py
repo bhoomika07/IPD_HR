@@ -21,10 +21,6 @@ class TestSerializer(serializers.ModelSerializer):
         model = test
         fields = '__all__'
 
-class TestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = test
-        fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:

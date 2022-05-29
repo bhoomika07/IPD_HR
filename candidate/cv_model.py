@@ -2,6 +2,7 @@ import re
 import pandas as pd
 import joblib
 import fitz 
+import os
 
 def cleanResume(resumeText):
     resumeText = re.sub('http\S+\s*', ' ', resumeText)  # remove URLs
@@ -12,7 +13,9 @@ def cleanResume(resumeText):
     return resumeText
 
 def pdf_ocr_ml(pdf_path):
-    doc = fitz.open(pdf_path)
+    strw=os.getcwd()
+    strw=strw.replace('\\',"/")
+    doc = fitz.open(strw+'/'+str(pdf_path))
     text = ''
     for page in doc:
         text += page.get_text()
@@ -26,7 +29,7 @@ def pdf_ocr_ml(pdf_path):
     11: 'Electrical Engineering', 12: 'HR', 13: 'Hadoop', 14: 'Health and fitness', 15: 'Java Developer', 
     16: 'Mechanical Engineer', 17: 'Network Security Engineer', 18: 'Operations Manager', 19: 'PMO', 20: 'Python Developer',
     21: 'SAP Developer', 22: 'Sales', 23: 'Testing', 24: 'Web Designing'}
-    model = joblib.load('cv_model/text_pipeline_5.joblib')
+    model = joblib.load(os.getcwd()+'\\candidate\\cv_model\\text_pipeline_5.joblib')
     prediction = model.predict(df['resume'][0:1])
     output = key_dict[prediction[0]]
     return output

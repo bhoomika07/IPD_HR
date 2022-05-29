@@ -7,8 +7,11 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.parsers import JSONParser
 from .models import company,job, test, question, option
+from django.contrib.auth.hashers import make_password,check_password
 import json
+
 
 from .serializers import CompanyLoginSerializer,CompanyDetailsSerializer,JobSerializer,TestSerializer,QuestionSerializer,OptionSerializer
 
@@ -25,73 +28,104 @@ def CompanyAction(request, format = None):
             return Response("No User Found")
 
     elif request.method == 'POST':
-        serializer1 =  CompanyDetailsSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            return Response(None)
-        return Response(serializer1.data)
+        req=request.data['data']
+        candidate=company(compid=req['compid'],comp_password=make_password(req['comp_password']),about=req['about'],name=req['name'])
+        candidate.save()
+        print("stored in db")
+        return Response({'status_code':0,'status_msg':'Register Successfull'})
 
 @api_view(['GET','POST'])
-def JobAction(request, format = None):
+def JobAction(request):
     if request.method == 'GET':
         job_objs = job.objects.all()
         list0 = []
         for job_obj in job_objs:
             dict1 = model_to_dict(job_obj)
-            compname = company.objects.get(compid = job_obj.compid).name
-            dict1['name'] = compname
+            dict1['name'] = job_obj.compid.name
+            dict1['testid'] = test.objects.get(jobid = job_obj.id).id
             list0.append(dict1)
         
-        return JsonResponse(list0)
+        return JsonResponse(list0,safe=False)
 
     elif request.method == 'POST':
-        serializer1 =  JobSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            return Response(None)
-        return Response(serializer1.data)
+        # serializer1 =  JobSerializer(data = request.data)
+        data=request.data['data']
+        jj=job(location=data['location'], jobname=data['jobname'],compid=company.objects.get(compid=data['compid']),description=data['description'],maxsalary=data['maxsalary'],minsalary=data['minsalary'],experience=data['experience'],jobdomain=data['jobdomain'],date=data['date'])
+        jj.save()
+        # if serializer1.is_valid():
+        #     serializer1.save()
+        #     print("stored in db")
+        # else:
+        #     print("error")
+        #     return Response(None)
+        return Response({'status_code':0,'status_msg':'Login Successfull','data':{'jobid':jj.id}})
 
 @api_view(['GET','POST'])
-def TestAction(request, format = None):
+def TestAction(request,id=0):
     if request.method == 'GET':
-        comp_obj = test.objects.get(id = request.data['id'])
-        dict0 = model_to_dict(comp_obj)
-        que_objs = question.objects.filter(testid = request.data['id'])
-        print(que_objs)
-        list3 = []
-        dict1 = {}
-        for q_obj in que_objs:
-            dict1= model_to_dict(q_obj)
-            opt_objs = option.objects.filter(qid = q_obj.id)
-            dict2 = {}
-            list5 = []
-            for o_obj in opt_objs:
-                dict2 = model_to_dict(o_obj)
-                list5.append(dict2)
-            dict1['options'] = list5
-            list3.append(dict1)
-        dict0['questions'] = list3
+        comp_obj = test.objects.filter(id = id)
+        dict0=TestSerializer(comp_obj,many=True).data
 
-        print(dict0)
-        return JsonResponse(dict0)
+        # comp_obj = test.objects.get(id = request.data['id'])
+        # dict0 = model_to_dict(comp_obj)
+        # que_objs = question.objects.filter(testid = request.data['id'])
+        # list3 = []
+        # dict1 = {}
+        # for q_obj in que_objs:
+        #     dict1= model_to_dict(q_obj)
+        #     opt_objs = option.objects.filter(qid = q_obj.id)
+        #     dict2 = {}
+        #     list5 = []
+        #     for o_obj in opt_objs:
+        #         dict2 = model_to_dict(o_obj)
+        #         list5.append(dict2)
+        #     dict1['options'] = list5
+        #     list3.append(dict1)
+        # dict0['questions'] = list3
+        return JsonResponse(dict0[0])
 
     elif request.method == 'POST':
-        serializer1 =  TestSerializer(data = request.data)
-        if serializer1.is_valid():
-            serializer1.save()
-            print("stored in db")
-        else:
-            print(serializer1.errors)
-        return Response(serializer1.data)
+        data=JSONParser().parse(request)['data']
+        tesst=test(jsonData=data['jsonData'],jobid=job.objects.get(id=data['jobid']),instructions=data['instructions'])
+        tesst.save()
+        # test_obj = test()
+        # test_obj.jobid = request.data['jobid']
+        # test_obj.instructions = request.data['instructions']
+        # test_obj.save()
+        # test_obj = test.objects.all()
+        # test_id = -1
+        # for test_o in test_obj:
+        #     test_id = test_o.id
+        # questions_objs = request.data['questions']
+        # for question_obj in questions_objs:
+        #     q_obj = question()
+        #     q_obj.testid = test_id
+        #     q_obj.description = question_obj['description']
+        #     q_obj.save()
+        #     q_obj = question.objects.all()
+        #     q_id = -1
+        #     for q_o in q_obj:
+        #         q_id = q_o.id
+        #     correctopt = int(question_obj['correct']) - 1
+        #     options_objs = question_obj['options']
+        #     for i in range(len(options_objs)):
+        #         option_obj = options_objs[i]
+        #         o_obj = option()
+        #         o_obj.qid = q_id
+        #         o_obj.description = option_obj['description']
+        #         if correctopt == i:
+        #             o_obj.correct = True
+        #         else:
+        #             o_obj.correct = False
+        #         o_obj.save()
+        return Response({'status_code':0,'status_msg':'Test Created','data':{'testid':tesst.id}})
+
     
 @api_view(['GET','POST'])
 def QuestionAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = question.objects.filter(id = request.data['id'])
+        comp_obj = question.objects.all()
+        # comp_obj = question.objects.filter(id = request.data['id'])
         serializer1 =   QuestionSerializer(comp_obj, many = True)
         return Response(serializer1.data)
     
