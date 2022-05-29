@@ -6,7 +6,7 @@ import "../styling/findCandidates.css";
 
 function CreateTest() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate1 = useNavigate();
   const [quesArr, setQuesArr] = useState([]);
   const [tempQs, setTempQs] = useState({
     question: "",
@@ -148,7 +148,7 @@ function CreateTest() {
           quesArr.map((obj) => {
             return <p>{obj.question}</p>;
           })}
-        {quesArr.length == 0 && <p>No questions added</p>}
+        {quesArr.length === 0 && <p>No questions added</p>}
 
         {/* <span className='row'>
             <span className='col'>
@@ -174,7 +174,7 @@ function CreateTest() {
             })
             .then((res) => {
               if (res.data.status_code === 0) {
-                navigate("/confirmation");
+                navigate1("/confirmation");
               } else {
                 alert(res.data.status_msg);
               }

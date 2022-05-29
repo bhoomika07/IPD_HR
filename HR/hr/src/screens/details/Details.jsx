@@ -29,7 +29,7 @@ function Details() {
 
   function starttest() {
     navigate("/aptitudeTest", {
-      state: { id: data.testid, compid: location.state.compid },
+      state: { id: data.testid, compid: location.state.compid, jobname : data.name },
     });
   }
 

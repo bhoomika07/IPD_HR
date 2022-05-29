@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Loginimg from "../img/login.png";
 import "../styling/register.css";
 import { useNavigate } from "react-router";
@@ -9,6 +9,7 @@ const Login = ({ isLogout, setIsLogout }) => {
     email: "",
     password: "",
   });
+  
 
   //const [records, setRecords] = useState([]);
 
@@ -34,7 +35,7 @@ const Login = ({ isLogout, setIsLogout }) => {
           localStorage.setItem("uData", JSON.stringify(res.data.data[0]));
           if (res.data.comp === 0) {
             // if user
-            navigate("/");
+            navigate("/homescreen");
           } else {
             // if company
             navigate("/applications");

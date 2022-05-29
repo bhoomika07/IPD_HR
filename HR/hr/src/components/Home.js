@@ -21,10 +21,10 @@ function Home() {
             <div>
                 <div class="row">
                     <div class="col">
-                    <input onClick={()=>navigate('/findCandidates')} type="button" className='btn btn-primary btn-block btn-lg' value="Post a job"/>
+                    <input onClick={()=>navigate('/Login')} type="button" className='btn btn-primary btn-block btn-lg' value="Post a job"/>
                     </div>
                     <div class="col">
-                    <input onClick={()=>navigate('/')} type="button" className=' btn-primary btn-block btn btn-lg' value="Find a job"/>
+                    <input onClick={()=>navigate('/Login')} type="button" className=' btn-primary btn-block btn btn-lg' value="Find a job"/>
                     </div>
                 </div>
             </div>

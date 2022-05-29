@@ -35,12 +35,13 @@ function App() {
         <Navbar isLogout={isLogout} setIsLogout={setIsLogout} />
         <div className="container">
           <Routes>
-            <Route path="/" element={<HomeScreen />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route
               path="/login"
               element={<Login isLogout={isLogout} setIsLogout={setIsLogout} />}
             />
+            <Route path="/homescreen" element={<HomeScreen />} />
             <Route path="/home" element={<Home />} />
             <Route path="/details" element={<Details />} />
             <Route path="/findCandidates" element={<FindCandidates />} />

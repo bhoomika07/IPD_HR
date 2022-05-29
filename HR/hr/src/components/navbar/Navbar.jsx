@@ -4,6 +4,7 @@ import JobSolutions from "../../JobSolutions.svg";
 import Vector39 from "../../Vector39.svg";
 import "./navbar.css";
 import { useNavigate } from "react-router";
+import { HomeScreen, Details } from "../../screens";
 
 const Navbar = ({ isLogout, setIsLogout }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Navbar = ({ isLogout, setIsLogout }) => {
                     fontWeight: "500",
                     fontSize: "25px",
                   }}
-                  href="/"
+                  href="/Homescreen"
                 >
                   Find Jobs
                 </a>
