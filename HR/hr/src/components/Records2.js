@@ -80,6 +80,7 @@ function Records2() {
                             ? "btn btn-success form-control btn-block"
                             : "btn btn-danger form-control btn-block"
                         }
+                        disabled
                       >
                         {!data.pending
                           ? "Pending"

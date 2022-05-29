@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styling/PerformanceDash.css";
 import { PieChart } from "react-minimal-pie-chart";
 import { ProgressBar } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 
 function PerformanceDash() {
+  const [jobs,setJobs] = useState([])
+  const [personality,setPersonality] = useState([])
   const location = useLocation();
+  useEffect(()=>{
+    let datax = "['data','web','app','blah blah']"
+    datax = datax.slice(2,datax.length-2)
+    let listt = datax.split("','")
+    setJobs(listt)
+
+    let datap = "['0.1','0.3','0.1','0.4','0.1','0.3','0.1','0.4','0.1','0.3','0.1','0.4','0.1','0.3','0.1','0.4']"
+    datax = datap.slice(2,datap.length-2)
+    let listp = datax.split("','")
+    listp = listp.map(l=>{
+      l = parseFloat(l)
+      return l;
+    })
+    setPersonality(listp)
+    console.log(listp)
+  },[])
   return (
     <div className="container con">
       <h4>
@@ -27,9 +45,22 @@ function PerformanceDash() {
             <div className="card-body pie">
               <PieChart
                 data={[
-                  { title: "INFP", value: 10, color: "rgb(255, 99, 132)" },
-                  { title: "INFJ", value: 15, color: "rgb(54, 162, 235)" },
-                  { title: "INTP", value: 20, color: "rgb(255, 205, 86)" },
+                  { title: "INFJ", value: personality[0], color: "#FF0000" },
+                  { title: "ENTP", value: personality[1], color: "#FF7300" },
+                  { title: "INTP", value: personality[2], color: "#FFAF00" },
+                  { title: "INTJ", value: personality[3], color: "#FFEC00" },
+                  { title: "ENTJ", value: personality[4], color: "#D5F30B" },
+                  { title: "ENFJ", value: personality[5], color: "#52D726" },
+                  { title: "INFP", value: personality[6], color: "#1BAA2F" },
+                  { title: "ENFP", value: personality[7], color: "#2DCB75" },
+                  { title: "ISFP", value: personality[8], color: "#26D7AE" },
+                  { title: "ISTP", value: personality[9], color: "#7CDDDD" },
+                  { title: "ISFJ", value: personality[10], color: "#5FB7D4" },
+                  { title: "ISTJ", value: personality[11], color: "#97D9FF" },
+                  { title: "ESTP", value: personality[12], color: "#007ED6" },
+                  { title: "ESFP", value: personality[13], color: "#8399EB" },
+                  { title: "ESTJ", value: personality[14], color: "#8E6CEF" },
+                  { title: "ESFJ", value: personality[15], color: "#9C46D0" },
                 ]}
               />
             </div>
@@ -55,8 +86,11 @@ function PerformanceDash() {
       <div className="card perf">
         <div className="card-header">Best Fit Job Role</div>
         <div className="card-body">
-          This candidate is highly suited for the position of{" "}
-          <b>Business Analyst</b> based on his CV and personality analysis.
+          <ol>
+          {jobs.map((job,index)=>{
+            return<li style={{textAlign:"left"}} key={index}>{job}</li>
+          })}
+          </ol>
         </div>
       </div>
     </div>

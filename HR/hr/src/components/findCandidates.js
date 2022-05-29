@@ -116,17 +116,18 @@ function FindCandidates() {
         <div className="card">
           <div className="card-header">Select job type.</div>
           <div className="card-body">
-            <label>
-              Job Role
-              <select name="jobdomain" onChange={handleInput}>
-                <option value="Data Analyst">Data Analyst</option>
-                <option value="App Developer">App Developer</option>
-                <option value="Web Developer">Web Developer</option>
-              </select>
-            </label>
+          <input
+              required
+              type="text"
+              name="jobdomain"
+              onChange={handleInput}
+              className="form-control"
+              id="jobdomain"
+              placeholder="Data Analyst,etc"
+            />
           </div>
         </div>
-        <div className="card">
+        {/* <div className="card">
           <div className="card-header">Ask for LinkedIn.</div>
           <div className="card-body">
             <div class="form-check">
@@ -206,7 +207,7 @@ function FindCandidates() {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
         <input type="submit" className="btn btn-lg b" value="Next" />
       </form>
     </div>
