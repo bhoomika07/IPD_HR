@@ -22,15 +22,10 @@ def personality_model(usernames):
        'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP']
     colnames = ['sentence']
     colnames = colnames+cols
-    consumer_key = "CwGQs6IWYXq2jRwqx4LYVsJrE"
-    consumer_secret= "HFzOiKHMy8PK4C8qKpf6I0gz3CFm7glTaHl4nyvas0P2d5cBh9"
-    bearer_token= "AAAAAAAAAAAAAAAAAAAAAAx3dAEAAAAAs9yXntCjeM3lBvkXkSEdmAACTZk%3Dnkz7JVOqmVvACIVl04GDH10qKS5MxVwZliBrW9woXPpuBD5F1z"
-    access_key= "900603028071251968-TavdcaAxdetvevjLAwv43RacpjGeigm"
-    access_secret= "6taeBOQpdWenR49vAUuzf3hfj6atLBXTaNpCNUIPGERyu"
+
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
-    # api = tweepy.API(auth,wait_on_rate_limit=True)
-    # bearer_token="AAAAAAAAAAAAAAAAAAAAAJN2dAEAAAAAekcTf6JUtL9KB7KS5Y3ItMfK9mo%3DcwdiYtjJr1UxahqiapKa0Ifkpi21dyrF30mefBCINP0Ww5HtKX"
+
     client = tweepy.Client(bearer_token=bearer_token)
     # usernames='Cristiano'
     user = client.get_user(username=usernames)
