@@ -1,14 +1,29 @@
+from ctypes import c_void_p
 from http.client import ResponseNotReady
+from importlib.machinery import SourcelessFileLoader
+import json
+from msilib.schema import File
+from unicodedata import name
 from urllib import response
+from xml.etree.ElementTree import XMLParser
 from django import dispatch
+import json
+import os
+from django.core.files.base import ContentFile
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password,check_password
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import JSONParser,MultiPartParser, FormParser, FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from requests_toolbelt.multipart import decoder
+from scipy.fftpack import cc_diff
+from sklearn.metrics import SCORERS
+import base64
 
+from .social_media_model import get_top_five, top_five_personalities
 from .models import Candidate, Response1, Personality
 from .serializers import *
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +31,7 @@ from django.utils.decorators import method_decorator
 from candidate.cv_model import pdf_ocr_ml
 from company.models import company
 from company.serializers import *
+from candidate.social_media_model import personality_model
 
 @api_view(['POST'])
 def CandidateActionLogin(request):
@@ -34,6 +50,12 @@ def CandidateActionLogin(request):
                 else:
                     return Response({'status_code':1,'status_msg':'Incorrect password'})
             return Response({'status_code':2,'status_msg':'User Dosnt exisits'})
+
+def findstr(pa2, str1):
+        findex = pa2.index(str1)+len(str1) + 9
+        lindex = pa2.index('\\',findex)
+        tempstr = pa2[findex:lindex]
+        return tempstr
 
 @api_view(['GET','POST'])
 def CandidateAction(request):
@@ -69,36 +91,92 @@ def CompanyPostingUpdateAction(request,id=0):
         return Response({'status_code':0,'stats_msg':'Updated Successfully'})
 
 
-@api_view(['GET','POST'])
-@csrf_exempt 
-def ResponseAction(request, format = None):
-    if request.method == 'GET':
-        resp_objs = Response1.objects.filter(**request.data)
+# @api_view(['GET','POST'])
+# @parser_classes([FormParser, MultiPartParser])
+# @csrf_exempt 
+class ResponseAction(APIView):
+    # parser_classes = [FormParser, MultiPartParser]
+    @csrf_exempt
+    def get(self, request, *args, **kwargs):
+        resp_objs = Response1.objects.all()
+        # resp_objs = Response1.objects.filter(**request.data)
         list0 = []
+        print(os.getcwd())
         for resp_obj in resp_objs:
             dict1 = model_to_dict(resp_obj)
-            candname = Candidate.objects.get(cand_email = resp_obj.cid)
-            dict1['cand_name'] = candname
+            # candname = Candidate.objects.get(cand_email = resp_obj.cid)
+            # dict1['cand_name'] = candname
+            strtemp = dict1['cv'].url
+            strtemp = strtemp.replace('\\','/')
+            strtemp = os.getcwd().replace('\\','/') + strtemp
+            print(strtemp)
+            dict1['cv'] = strtemp
             list0.append(dict1)
 
         return JsonResponse(list0,safe=False)
 
-
-    elif request.method == 'POST':
-        serializer1 =  ResponseSerializer(data = request.data)       
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+        strw=os.getcwd()
+        strw=strw.replace('\\',"/")
+        strw = strw + '/'
+        print(strw)
+        # pa = str(request.data)
+        # pa4 = pa.split('\\r\\n')
+        # print(pa4)
+        # dict1 = {}
+        # dict1['cid'] = findstr(pa,'cid')
+        # dict1['testid'] = findstr(pa,'testid')
+        # dict1['linkedin'] = findstr(pa,'linkedin')
+        # dict1['score'] = findstr(pa,'score')
+        # # dict1['cv'] = findstr(pa,'cv')
+        # dict1['compid'] = findstr(pa,'compid')
+        # print(request.data)
+        # print()
+        # print(dict1)
+        # print(findstr(pa,'cv'))
+        # print(request.data['cv'])
+        # serializer1 =  ResponseSerializer(data = request.data)  
+        # print(request._request.FILES)
+        dict1 = request.data
+        encoded_string = str(request.data['cv'])[request.data['cv'].index(',')+1:]
+        file_64_decode = base64.b64decode(encoded_string) 
+        file_result = ContentFile(file_64_decode, name = request.data['filename'])
+        # file_result = open(request.data['filename'], 'wb') 
+        # file_result.write(file_64_decode)
+        # strtemp =  request.data['filename']
+        dict1['cv'] = file_result
+        # personality_list = personality_model(dict1['linkedin'])
+        # dict1['cand_personality'] = personality_list
+        list_for_personality = ['0.03464252129197121', '0.10879313200712204', '0.019313829019665718', '0.027873985469341278', '0.017168141901493073', '0.03083859570324421', '0.02327725850045681', '0.06220710650086403', '0.11595608294010162', '0.1400085836648941', '0.10482675582170486', '0.052915919572114944', '0.03660311549901962', '0.05276454612612724', '0.06660696864128113', '0.10620341449975967']
+        for i in range(len(list_for_personality)):
+            list_for_personality[i] = float(list_for_personality[i])
+        final_list_for_personality = get_top_five(list_for_personality)
+        print(final_list_for_personality[0])
+        dict1['topfive_personality'] = str(final_list_for_personality)
+        dict1['cand_personality'] = "['0.03464252129197121', '0.10879313200712204', '0.019313829019665718', '0.027873985469341278', '0.017168141901493073', '0.03083859570324421', '0.02327725850045681', '0.06220710650086403', '0.11595608294010162', '0.1400085836648941', '0.10482675582170486', '0.052915919572114944', '0.03660311549901962', '0.05276454612612724', '0.06660696864128113', '0.10620341449975967']"
+        # predicted_arr = pdf_ocr_ml(dict1['filename'])
+        filename1 = dict1['filename']
+        del dict1['filename']
+        # dict1['suggested_role'] = predicted_arr
+        print(dict1)
+        serializer1 =  ResponseSerializer(data = dict1) 
+        # dict1['cv'] = theFile.write(base64.b64decode(base64String.split(",")[1:2]))
+        # print(request.data['filename'])
         if serializer1.is_valid():
             resp_obj = Response1.objects.filter(cid=request.data['cid'],testid=request.data['testid'])
             if not resp_obj.exists():
                 serializer1.save()
-            resp_obj=resp_obj[0]
-            resp_cv = resp_obj.cv
-            output = pdf_ocr_ml(resp_cv)
-            resp_obj.suggested_role = output
-            resp_obj.save()         
-            
+            print("stored")   
+            resp_obj = Response1.objects.get(cid = request.data['cid'],testid=request.data['testid'])
+            predicted_arr = pdf_ocr_ml(filename1)
+            print(predicted_arr)
+            resp_obj.suggested_role = predicted_arr
+            resp_obj.save()
         else:
-            return Response('h')
-        return Response(serializer1.data)
+            print(serializer1.errors)
+            return Response(serializer1.data)
+        return HttpResponse('hi')
 
 @api_view(['GET'])
 def PersonalityAction( request, format = None):

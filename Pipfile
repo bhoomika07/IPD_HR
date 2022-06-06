@@ -12,6 +12,13 @@ joblib = "*"
 pandas = "*"
 pymupdf = "*"
 sklearn = "*"
+requests-toolbelt = "*"
+tqdm = "*"
+tensorflow = "*"
+nltk = "*"
+transformers = "*"
+tweepy = "*"
+ipywidgets = "*"
 
 [dev-packages]
 

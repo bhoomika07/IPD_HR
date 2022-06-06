@@ -124,7 +124,8 @@ def TestAction(request,id=0):
 @api_view(['GET','POST'])
 def QuestionAction(request, format = None):
     if request.method == 'GET':
-        comp_obj = question.objects.filter(id = request.data['id'])
+        comp_obj = question.objects.all()
+        # comp_obj = question.objects.filter(id = request.data['id'])
         serializer1 =   QuestionSerializer(comp_obj, many = True)
         return Response(serializer1.data)
     
