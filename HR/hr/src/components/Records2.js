@@ -14,6 +14,7 @@ function Records2() {
         }/`
       )
       .then((res) => {
+        console.log(res)
         setData(res.data.data);
       })
       .catch((err) => {
@@ -58,6 +59,9 @@ function Records2() {
                           state: {
                             score: data.score,
                             comp_name: data.comp_name,
+                            cand_personality : data.cand_personality,
+                            suggested_jobs : data.suggested_role,
+                                top_five : data.topfive_personality
                           },
                         });
                       }}

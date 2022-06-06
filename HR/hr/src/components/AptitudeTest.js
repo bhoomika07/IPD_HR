@@ -34,7 +34,9 @@ function AptitudeTest() {
   const onFileChange = (event) => {
     uploadImage(event);
   };
-
+  const onlinkedinChange = (event) =>{
+    setLkdn(event.target.value)
+  };
   useEffect(() => {
     const data = async () =>
       await axios
@@ -64,7 +66,7 @@ function AptitudeTest() {
       JSON.parse(localStorage.getItem("uData"))["cand_email"]
     );
     formData1.append("testid", location.state.id);
-    formData1.append("linkedin", "asasdads");
+    formData1.append("linkedin", lkdn);
     formData1.append("score", Math.ceil((c * 100) / total));
     console.log(selectedFile)
     //formData1.append("cv", selectedFile);
@@ -169,13 +171,15 @@ var json1 = JSON.stringify(object);
           </div>
         </div>
         <div className="card">
-          <div className="card-header">Add your Linkedin.</div>
+          <div className="card-header">Add your Twitter {lkdn}</div>
           <div className="card-body">
             <input
               type="text"
               name="op"
               className="form-control"
               id="op"
+              value = {lkdn}
+              onChange={onlinkedinChange}
               placeholder="https://www.linkedin.com/in/bhoomika-valani-695b22199/"
             />
           </div>
